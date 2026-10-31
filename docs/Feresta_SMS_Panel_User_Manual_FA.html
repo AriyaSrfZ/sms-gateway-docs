@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feresta_SMS_Panel_User_Manual_FA.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+
+<div class="doc-body" dir="rtl">
+<h1 id="راهنمای-جامع-و-کاربردی-سامانه-پیام-کوتاه-فِرِستا-persiafava">راهنمای جامع و کاربردی سامانه پیام کوتاه فِرِستا (PersiaFava)</h1>
+<blockquote>
+<p><strong>سامانه پیام کوتاه فِرِستا (فرستا، رسا در رسانه)</strong><br>
+<strong>آدرس ورود به پنل:</strong> <a href="https://panel.persiafava.com">https://panel.persiafava.com</a><br>
+<strong>پشتیبانی و امور مشترکین:</strong> <a href="https://panel.persiafava.com/dashboard/support">سامانه تیکتینگ درون پنل کاربری</a></p>
+</blockquote>
+<hr>
+<h2 id="فهرست-سرفصلها">فهرست سرفصل‌ها</h2>
+<ul>
+<li><a href="#%D8%B1%D8%A7%D9%87%D9%86%D9%85%D8%A7%DB%8C-%D8%AC%D8%A7%D9%85%D8%B9-%D9%88-%DA%A9%D8%A7%D8%B1%D8%A8%D8%B1%D8%AF%DB%8C-%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87-%D9%BE%DB%8C%D8%A7%D9%85-%DA%A9%D9%88%D8%AA%D8%A7%D9%87-%D9%81%D9%90%D8%B1%D9%90%D8%B3%D8%AA%D8%A7-persiafava">راهنمای جامع و کاربردی سامانه پیام کوتاه فِرِستا (PersiaFava)</a>
+<ul>
+<li><a href="#%D9%81%D9%87%D8%B1%D8%B3%D8%AA-%D8%B3%D8%B1%D9%81%D8%B5%D9%84%D9%87%D8%A7">فهرست سرفصل‌ها</a></li>
+<li><a href="#%DB%B1-%D9%85%D9%82%D8%AF%D9%85%D9%87-%D9%88-%D8%B4%D8%B1%D9%88%D8%B9-%D8%B3%D8%B1%DB%8C%D8%B9">۱. مقدمه و شروع سریع</a></li>
+<li><a href="#%DB%B2-%D8%AB%D8%A8%D8%AA%D9%86%D8%A7%D9%85-%D9%88%D8%B1%D9%88%D8%AF-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%88-%D8%A7%D8%AD%D8%B1%D8%A7%D8%B2-%D9%87%D9%88%DB%8C%D8%AA">۲. ثبت‌نام، ورود، امنیت و احراز هویت</a>
+<ul>
+<li><a href="#%D8%A7%D9%84%D9%81-%D8%AB%D8%A8%D8%AA%D9%86%D8%A7%D9%85-%D8%AF%D8%B1-%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87">الف) ثبت‌نام در سامانه</a></li>
+<li><a href="#%D8%A8-%D9%88%D8%B1%D9%88%D8%AF-%D8%A7%D9%85%D9%86-%D8%A8%D9%87-%D9%BE%D9%86%D9%84">ب) ورود امن به پنل</a></li>
+<li><a href="#%D8%AC-%D8%A7%D8%AD%D8%B1%D8%A7%D8%B2-%D9%87%D9%88%DB%8C%D8%AA-%D9%82%D8%A7%D9%86%D9%88%D9%86%DB%8C">ج) احراز هویت قانونی</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B3-%D8%AF%D8%A7%D8%B4%D8%A8%D9%88%D8%B1%D8%AF-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA%DB%8C-%D9%88-%D8%B4%D8%A7%D8%AE%D8%B5%D9%87%D8%A7%DB%8C-%D8%A2%D9%85%D8%A7%D8%B1%DB%8C">۳. داشبورد مدیریتی و شاخص‌های آماری</a>
+<ul>
+<li><a href="#%D8%A7%D8%AC%D8%B2%D8%A7%DB%8C-%D8%A7%D8%B5%D9%84%DB%8C-%D8%AF%D8%A7%D8%B4%D8%A8%D9%88%D8%B1%D8%AF">اجزای اصلی داشبورد:</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B4-%D8%B1%D8%A7%D9%87%D9%86%D9%85%D8%A7%DB%8C-%D8%AC%D8%A7%D9%85%D8%B9-%D9%85%D8%A7%DA%98%D9%88%D9%84-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9">۴. راهنمای جامع ماژول ارسال پیامک</a>
+<ul>
+<li><a href="#%D9%82%D9%88%D8%A7%D9%86%DB%8C%D9%86-%D9%88-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%D8%AF%D8%A7%D8%B1%D8%AF%D9%87%D8%A7%DB%8C-%D8%B9%D9%85%D9%88%D9%85%DB%8C-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9">قوانین و استانداردهای عمومی ارسال پیامک</a>
+<ul>
+<li><a href="#%DB%B1-%D9%81%D8%B1%D9%85%D8%AA-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%D8%AF%D8%A7%D8%B1%D8%AF-%D8%B4%D9%85%D8%A7%D8%B1%D9%87%D9%87%D8%A7%DB%8C-%DA%AF%DB%8C%D8%B1%D9%86%D8%AF%D9%87-%D8%AF%D8%B1-%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87-%D9%81%D8%B1%D8%B3%D8%AA%D8%A7">۱. فرمت استاندارد شماره‌های گیرنده در سامانه فرستا</a></li>
+<li><a href="#%DB%B2-%D9%82%D9%88%D8%A7%D8%B9%D8%AF-%D8%B4%D9%85%D8%A7%D8%B1%D8%B4-%DA%A9%D8%A7%D8%B1%D8%A7%DA%A9%D8%AA%D8%B1-%D9%88-%D8%B5%D9%81%D8%AD%D8%A7%D8%AA-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9">۲. قواعد شمارش کاراکتر و صفحات پیامک</a></li>
+<li><a href="#%DB%B3-%D8%A7%D8%A8%D8%B2%D8%A7%D8%B1%D9%87%D8%A7%DB%8C-%DA%A9%D9%85%DA%A9%DB%8C-%D9%88%DB%8C%D8%B1%D8%A7%DB%8C%D8%B4-%D9%85%D8%AA%D9%86">۳. ابزارهای کمکی ویرایش متن</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B1-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%B3%D8%A7%D8%AF%D9%87-simple-send">۱. ارسال ساده (Simple Send)</a>
+<ul>
+<li><a href="#%D8%B1%D9%88%D8%B4-%D8%A7%D9%84%D9%81-%D9%88%D8%A7%D8%B1%D8%AF-%DA%A9%D8%B1%D8%AF%D9%86-%D8%B4%D9%85%D8%A7%D8%B1%D9%87-%D8%A8%D9%87-%D8%B5%D9%88%D8%B1%D8%AA-%D8%AF%D8%B3%D8%AA%DB%8C">روش الف: وارد کردن شماره به صورت دستی</a></li>
+<li><a href="#%D8%B1%D9%88%D8%B4-%D8%A8-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A7%D8%B2-%D9%84%DB%8C%D8%B3%D8%AA-%D9%85%D8%AE%D8%A7%D8%B7%D8%A8%DB%8C%D9%86">روش ب: ارسال از لیست مخاطبین</a></li>
+<li><a href="#%D8%B1%D9%88%D8%B4-%D8%AC-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A7%D8%B2-%D8%B7%D8%B1%DB%8C%D9%82-%D8%A2%D9%BE%D9%84%D9%88%D8%AF-%D9%81%D8%A7%DB%8C%D9%84">روش ج: ارسال از طریق آپلود فایل</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B2-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF-smart-send">۲. ارسال هوشمند (Smart Send)</a>
+<ul>
+<li><a href="#%DB%B1-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF-%D8%AF%D8%A7%DB%8C%D9%86%D8%A7%D9%85%DB%8C%DA%A9">۱. هوشمند داینامیک</a></li>
+<li><a href="#%DB%B2-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF-%D8%A7%DA%A9%D8%B3%D9%84">۲. هوشمند اکسل</a></li>
+<li><a href="#%DB%B3-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF-%D9%85%D8%AA%D9%86%D8%A7%D8%B8%D8%B1-%D8%A2%D9%BE%D9%84%D9%88%D8%AF-%D9%81%D8%A7%DB%8C%D9%84">۳. هوشمند متناظر آپلود فایل</a></li>
+<li><a href="#%DB%B4-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF-%D9%85%D8%AA%D9%86%D8%A7%D8%B8%D8%B1-%D8%AF%D8%B3%D8%AA%DB%8C">۴. هوشمند متناظر دستی</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B3-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A8%D9%87-%D8%A8%D8%A7%D9%86%DA%A9-%D8%B4%D9%85%D8%A7%D8%B1%D9%87-%DA%A9%D8%B4%D9%88%D8%B1%DB%8C-%D9%88-%D9%85%D9%86%D8%B7%D9%82%D9%87%D8%A7%DB%8C">۳. ارسال به بانک شماره کشوری و منطقه‌ای</a>
+<ul>
+<li><a href="#%D8%A7%D9%84%D9%81-%D8%A8%D9%87-%D8%AA%D9%81%DA%A9%DB%8C%DA%A9-%D8%B4%D9%87%D8%B1-%D9%88-%DA%A9%D8%AF-%D9%BE%D8%B3%D8%AA%DB%8C">الف) به تفکیک شهر و کد پستی</a></li>
+<li><a href="#%D8%A8-%D8%AE%D8%B7%D9%88%D8%B7-%D9%87%D9%85%D8%B1%D8%A7%D9%87-%D8%A7%D9%88%D9%84-%D8%A8%D9%87-%D8%AA%D9%81%DA%A9%DB%8C%DA%A9-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D9%88-%D8%B4%D9%87%D8%B1">ب) خطوط همراه اول به تفکیک استان و شهر</a></li>
+<li><a href="#%D8%AC-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A8%D8%A7-%D8%AC%D8%B3%D8%AA%D8%AC%D9%88%DB%8C-%D8%B3%D8%B1%D8%B4%D9%85%D8%A7%D8%B1%D9%87">ج) ارسال با جستجوی سرشماره</a></li>
+<li><a href="#%D8%AF-%D8%A8%D8%A7%D9%86%DA%A9-%D9%85%D8%B4%D8%A7%D8%BA%D9%84-%D9%88-%D8%A7%D8%B5%D9%86%D8%A7%D9%81-%DA%A9%D8%B4%D9%88%D8%B1%DB%8C-%D9%88-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%DB%8C">د) بانک مشاغل و اصناف کشوری و استانی</a></li>
+<li><a href="#%D9%87%D9%80-%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A7%D8%B2-%D8%B1%D9%88%DB%8C-%D9%86%D9%82%D8%B4%D9%87-bts">هـ) ارسال از روی نقشه (BTS)</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B4-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%BE%DB%8C%D8%B4%D9%86%D9%88%DB%8C%D8%B3%D9%87%D8%A7%DB%8C-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9">۴. مدیریت پیش‌نویس‌های پیامک</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B5-%D8%AF%D9%81%D8%AA%D8%B1%DA%86%D9%87-%D8%AA%D9%84%D9%81%D9%86-%D9%88-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%85%D8%AE%D8%A7%D8%B7%D8%A8%DB%8C%D9%86">۵. دفترچه تلفن و مدیریت مخاطبین</a>
+<ul>
+<li><a href="#%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%DA%AF%D8%B1%D9%88%D9%87%D9%87%D8%A7">مدیریت گروه‌ها</a></li>
+<li><a href="#%DB%B5-%D8%B4%DB%8C%D9%88%D9%87-%D8%A7%D9%81%D8%B2%D9%88%D8%AF%D9%86-%D9%85%D8%AE%D8%A7%D8%B7%D8%A8-%D8%A8%D9%87-%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87">۵ شیوه افزودن مخاطب به سامانه</a>
+<ul>
+<li><a href="#%DB%B1-%D9%88%D8%A7%D8%B1%D8%AF-%DA%A9%D8%B1%D8%AF%D9%86-%D8%A8%D9%87-%D8%B5%D9%88%D8%B1%D8%AA-%D8%AA%DA%A9%DB%8C">۱. وارد کردن به صورت تکی</a></li>
+<li><a href="#%DB%B2-%D8%A2%D9%BE%D9%84%D9%88%D8%AF-%D9%81%D8%A7%DB%8C%D9%84">۲. آپلود فایل</a></li>
+<li><a href="#%DB%B3-%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D9%84-%D8%A7%D8%B2-%DA%AF%D8%B1%D9%88%D9%87%D9%87%D8%A7%DB%8C-%D8%AF%DB%8C%DA%AF%D8%B1">۳. انتقال از گروه‌های دیگر</a></li>
+<li><a href="#%DB%B4-%D9%88%D8%A7%D8%B1%D8%AF-%DA%A9%D8%B1%D8%AF%D9%86-%D8%A8%D9%87-%D8%B5%D9%88%D8%B1%D8%AA-%D8%B1%D9%86%D8%AC%DB%8C">۴. وارد کردن به صورت رنجی</a></li>
+<li><a href="#%DB%B5-%D9%88%D8%A7%D8%B1%D8%AF-%DA%A9%D8%B1%D8%AF%D9%86-%D8%AF%D8%B3%D8%AA%DB%8C-%D8%AF%D8%B3%D8%AA%D9%87%D8%A7%DB%8C">۵. وارد کردن دستی دسته‌ای</a></li>
+</ul>
+</li>
+<li><a href="#%D8%B9%D9%85%D9%84%DB%8C%D8%A7%D8%AA-%D9%88-%D8%A7%D9%85%DA%A9%D8%A7%D9%86%D8%A7%D8%AA-%D8%B1%D9%88%DB%8C-%D9%85%D8%AE%D8%A7%D8%B7%D8%A8%DB%8C%D9%86-%D9%BE%D8%B3-%D8%A7%D8%B2-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF">عملیات و امکانات روی مخاطبین پس از ایجاد</a></li>
+<li><a href="#%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D8%B1%D9%88%DB%8C%D8%AF%D8%A7%D8%AF%D9%87%D8%A7-%D9%88-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%D8%AA%D9%87%D8%A7%DB%8C-%D9%87%D9%88%D8%B4%D9%85%D9%86%D8%AF">مدیریت رویدادها و مناسبت‌های هوشمند</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B6-%D8%A7%D9%85%DA%A9%D8%A7%D9%86%D8%A7%D8%AA-%D9%88%DB%8C%DA%98%D9%87-%D9%88-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%DB%8C">۶. امکانات ویژه و تعاملی</a>
+<ul>
+<li><a href="#%D9%85%D9%86%D8%B4%DB%8C-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9%DB%8C-sms-assist">منشی پیامکی (SMS Assist)</a>
+<ul>
+<li><a href="#%D9%85%D8%B1%D8%A7%D8%AD%D9%84-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%D9%85%D9%86%D8%B4%DB%8C-%D8%AC%D8%AF%DB%8C%D8%AF">مراحل ایجاد منشی جدید:</a></li>
+</ul>
+</li>
+<li><a href="#%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D9%87-%D9%86%D8%B8%D8%B1%D8%B3%D9%86%D8%AC%DB%8C-%D9%88-%D9%82%D8%B1%D8%B9%D9%87%DA%A9%D8%B4%DB%8C">مسابقه، نظرسنجی و قرعه‌کشی</a></li>
+<li><a href="#%D9%86%D9%88%D8%A8%D8%AA%D8%AF%D9%87%DB%8C-%D9%88-%D8%AA%D8%AD%D9%84%DB%8C%D9%84%DA%AF%D8%B1">نوبت‌دهی و تحلیلگر</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B7-%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4%D9%87%D8%A7-%D9%BE%DB%8C%DA%AF%DB%8C%D8%B1%DB%8C-%D9%88%D8%B6%D8%B9%DB%8C%D8%AA-%D8%AA%D8%AD%D9%88%DB%8C%D9%84-%D9%88-%D8%AE%D8%B1%D9%88%D8%AC%DB%8C-%D8%A7%DA%A9%D8%B3%D9%84">۷. گزارش‌ها، پیگیری وضعیت تحویل و خروجی اکسل</a>
+<ul>
+<li><a href="#%D8%A7%D9%86%D9%88%D8%A7%D8%B9-%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4%D9%87%D8%A7">انواع گزارش‌ها:</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B8-%D8%AA%D9%86%D8%B8%DB%8C%D9%85%D8%A7%D8%AA-%D8%AD%D8%B3%D8%A7%D8%A8-%D8%B4%D8%AE%D8%B5%DB%8C%D8%B3%D8%A7%D8%B2%DB%8C-%D9%88-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%BE%DB%8C%D8%B4%D8%B1%D9%81%D8%AA%D9%87">۸. تنظیمات حساب، شخصی‌سازی و امنیت پیشرفته</a>
+<ul>
+<li><a href="#%D8%AA%D9%86%D8%B8%DB%8C%D9%85%D8%A7%D8%AA-%D9%BE%D8%B1%D9%88%D9%81%D8%A7%DB%8C%D9%84">تنظیمات پروفایل</a></li>
+<li><a href="#%D8%B4%D8%AE%D8%B5%DB%8C%D8%B3%D8%A7%D8%B2%DB%8C-%D9%BE%DB%8C%D8%B4%D8%B1%D9%81%D8%AA%D9%87-%D9%BE%DB%8C%D8%A7%D9%85%D9%87%D8%A7">شخصی‌سازی پیشرفته پیام‌ها</a></li>
+<li><a href="#%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9-%D9%88-%D9%88%D8%A8%D9%87%D9%88%DA%A9">انتقال پیامک و وب‌هوک</a></li>
+</ul>
+</li>
+<li><a href="#%DB%B9-%D8%A7%D9%85%D9%88%D8%B1-%D9%85%D8%A7%D9%84%DB%8C-%D9%88-%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%D8%A7%D8%B9%D8%AA%D8%A8%D8%A7%D8%B1">۹. امور مالی و افزایش اعتبار</a></li>
+<li><a href="#%DB%B1%DB%B0-%D9%85%D8%B1%DA%A9%D8%B2-%D9%BE%D8%B4%D8%AA%DB%8C%D8%A8%D8%A7%D9%86%DB%8C-%D9%88-%D8%AA%DB%8C%DA%A9%D8%AA%DB%8C%D9%86%DA%AF">۱۰. مرکز پشتیبانی و تیکتینگ</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="۱-مقدمه-و-شروع-سریع">۱. مقدمه و شروع سریع</h2>
+<p>سامانه پیام کوتاه <strong>فِرِستا</strong>، زیرساختی مدرن، سریع و یکپارچه برای مدیریت ارتباطات پیامکی سازمانی، تبلیغاتی و خدماتی است. این سامانه با اتصال مستقیم به درگاه‌های معتبر اپراتوری (همراه اول، ایرانسل، رایتل و اپراتورهای ثابت) بستری پایدار جهت ارسال پیامک‌های اطلاع‌رسانی، کدهای احراز هویت، کمپین‌های تبلیغاتی منطقه‌ای و پاسخگویی خودکار به مشتریان فراهم می‌آورد.</p>
+<hr>
+<h2 id="۲-ثبتنام-ورود-امنیت-و-احراز-هویت">۲. ثبت‌نام، ورود، امنیت و احراز هویت</h2>
+<h3 id="الف-ثبتنام-در-سامانه">الف) ثبت‌نام در سامانه</h3>
+<p>برای ایجاد حساب کاربری جدید به آدرس <a href="https://panel.persiafava.com/register">صفحه ثبت‌نام</a> مراجعه نمایید و مشخصات زیر را تکمیل کنید:</p>
+<ul>
+<li><strong>نام کاربری (Username):</strong> شناسه ورود یکتا با حداقل ۳ کاراکتر انگلیسی یا عددی.</li>
+<li><strong>رمز عبور و تکرار آن:</strong> کلمه عبور ایمن شامل ترکیب حروف بزرگ، کوچک و ارقام.</li>
+<li><strong>نام و نام خانوادگی:</strong> نام کامل دارنده حساب منطبق با مدارک شناسایی.</li>
+<li><strong>شماره همراه:</strong> شماره فعال بدون فاصله جهت دریافت کدهای تایید و پیام‌های امنیتی.</li>
+<li><strong>پست الکترونیکی:</strong> ایمیل معتبر برای مکاتبات و بازیابی کلمه عبور.</li>
+<li><strong>پکیج کاربری:</strong> انتخاب بسته متناسب با برآورد حجم ارسال و تعرفه دلخواه.</li>
+</ul>
+<p>پس از مطالعه و فعال‌سازی گزینه موافقت با قوانین، کد امنیتی را وارد کرده و بر روی دکمه <strong>ثبت‌نام</strong> کلیک نمایید.</p>
+<h3 id="ب-ورود-امن-به-پنل">ب) ورود امن به پنل</h3>
+<ol>
+<li>در <a href="https://panel.persiafava.com/login">صفحه ورود</a>، نام کاربری و رمز عبور خود را وارد کنید.</li>
+<li>فعال‌سازی گزینه «مرا به یاد داشته باش» نشست کاری شما را روی مرورگر ذخیره می‌کند.</li>
+<li>در صورت فراموشی کلمه عبور، از طریق <a href="https://panel.persiafava.com/forget-password">صفحه فراموشی رمز عبور</a> می‌توانید لینک بازیابی را روی موبایل یا ایمیل خود دریافت نمایید.</li>
+</ol>
+<h3 id="ج-احراز-هویت-قانونی">ج) احراز هویت قانونی</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/profile/verify">https://panel.persiafava.com/dashboard/profile/verify</a></li>
+</ul>
+<p>مطابق با ضوابط سازمان تنظیم مقررات و ارتباطات رادیویی، پیش از ارسال پیامک عمومی باید مدارک هویتی تایید گردد:</p>
+<ul>
+<li><strong>کاربران حقیقی:</strong> بارگذاری تصویر کارت ملی هوشمند، شناسنامه و تایید انطباق شماره همراه با کد ملی دارنده حساب.</li>
+<li><strong>کاربران حقوقی و سازمان‌ها:</strong> تصویر آگهی تاسیس و آخرین روزنامه رسمی، کد اقتصادی، شناسه ملی شرکت و معرفی‌نامه رسمی نماینده بر روی سربرگ سازمانی.</li>
+</ul>
+<hr>
+<h2 id="۳-داشبورد-مدیریتی-و-شاخصهای-آماری">۳. داشبورد مدیریتی و شاخص‌های آماری</h2>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard">https://panel.persiafava.com/dashboard</a></li>
+</ul>
+<p>پس از ورود به سامانه، صفحه پیشخوان وضعیت کلی حساب کاربری و گزارش‌های فوری را پیش روی شما قرار می‌دهد:</p>
+<p><img src="./images/dashboard.png" alt="داشبورد مدیریتی فرستا"></p>
+<h3 id="اجزای-اصلی-داشبورد">اجزای اصلی داشبورد:</h3>
+<ol>
+<li><strong>نوار بالایی (Top Header):</strong> دسترسی سریع به راهنما، تغییر تم تاریک و روشن، مشاهده اطلاعیه‌ها در <a href="https://panel.persiafava.com/dashboard/messages">پیام‌های سامانه</a> و مدیریت پروفایل.</li>
+<li><strong>نمایش آنلاین اعتبار ریالی (Sidebar Bottom):</strong> مشاهده لحظه‌ای مانده حساب با امکان ورود مستقیم به <a href="https://panel.persiafava.com/dashboard/financial/charge">صفحه شارژ حساب</a>.</li>
+<li><strong>نمودار ترافیک ارسال و دریافت:</strong> نمایش تحلیلی و آماری عملکرد پیامک‌ها در دوره‌های ۷ روزه و ۳۰ روزه گذشته.</li>
+<li><strong>جدول آخرین پیامک‌ها:</strong> فهرست ۱۰ پیام اخیر به همراه متن، سرشماره ارسال‌کننده، گیرنده، ساعت ارسال و لینک پیگیری دلیوری.</li>
+<li><strong>شمارنده‌های شاخص وضعیت:</strong>
+<ul>
+<li><strong>پیش‌نویس سریع:</strong> یادداشت و ذخیره پیام‌های آماده.</li>
+<li><strong>در صف تایید:</strong> پیام‌های ارسالی در انتظار بازبینی محتوایی اپراتور.</li>
+<li><strong>ارسال شده:</strong> پیامک‌های مخابره‌شده به شبکه ارتباطی.</li>
+<li><strong>ارسال در آینده:</strong> پیام‌های زمان‌بندی‌شده برای تاریخ‌های بعد.</li>
+<li><strong>لیست سیاه (Blacklist):</strong> شماره‌هایی که پیامک تبلیغاتی خط خود را مسدود کرده‌اند.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="۴-راهنمای-جامع-ماژول-ارسال-پیامک">۴. راهنمای جامع ماژول ارسال پیامک</h2>
+<h3 id="قوانین-و-استانداردهای-عمومی-ارسال-پیامک">قوانین و استانداردهای عمومی ارسال پیامک</h3>
+<h4 id="۱-فرمت-استاندارد-شمارههای-گیرنده-در-سامانه-فرستا">۱. فرمت استاندارد شماره‌های گیرنده در سامانه فرستا</h4>
+<ul>
+<li>تمامی شماره‌های گیرندگان باید به شکل <strong>۱۰ رقمی بدون صفر اولیه و بدون پیش‌شماره کشور</strong> وارد شوند (مانند <code>9121234567</code>).</li>
+<li>درج شماره با پیش‌شماره‌های <code>0912...</code> یا <code>+98912...</code> در بخش دستی خطا محسوب می‌شود.</li>
+<li>در کادرهای متنی، با فشردن کلید <strong>Enter</strong> یا استفاده از ویرگول (<strong>,</strong>) می‌توانید شماره‌ها را از هم تفکیک نمایید.</li>
+</ul>
+<h4 id="۲-قواعد-شمارش-کاراکتر-و-صفحات-پیامک">۲. قواعد شمارش کاراکتر و صفحات پیامک</h4>
+<ul>
+<li><strong>متن فارسی:</strong>
+<ul>
+<li>صفحه اول: تا ۷۰ کاراکتر (معادل ۱ پیامک)</li>
+<li>صفحه دوم: از ۷۱ تا ۱۳۴ کاراکتر (۶۷ کاراکتر به ازای هر صفحه بعدی)</li>
+<li>صفحه سوم و بالاتر: هر بخش ۶۷ کاراکتر</li>
+</ul>
+</li>
+<li><strong>متن انگلیسی:</strong>
+<ul>
+<li>صفحه اول: تا ۱۶۰ کاراکتر (معادل ۱ پیامک)</li>
+<li>صفحه دوم: از ۱۶۱ تا ۳۰۶ کاراکتر (۱۵۳ کاراکتر به ازای هر صفحه بعدی)</li>
+<li>صفحه سوم و بالاتر: هر بخش ۱۵۳ کاراکتر</li>
+</ul>
+</li>
+<li><strong>نکته:</strong> وجود حتی یک کاراکتر فارسی یا کاراکتر ویژه در متن، ساختار کل پیام را فارسی محاسبه می‌کند.</li>
+</ul>
+<h4 id="۳-ابزارهای-کمکی-ویرایش-متن">۳. ابزارهای کمکی ویرایش متن</h4>
+<p>در بالای کادر نگارش متن، سه ابزار کاربردی برای بهبود پیام تعبیه شده است:</p>
+<ul>
+<li><strong>حذف فاصله‌های اضافی:</strong> پاک‌سازی خودکار فاصله‌های زائد و نیم‌فاصله‌های تکراری جهت جلوگیری از افزایش بی‌مورد صفحات پیامک.</li>
+<li><strong>اعداد انگلیسی:</strong> یکدست‌سازی تمام ارقام به اعداد انگلیسی (مناسب کدها، شماره تماس و لینک‌ها).</li>
+<li><strong>اعداد فارسی:</strong> تبدیل تمام اعداد موجود در متن به ارقام فارسی جهت زیبایی بصری متون فارسی.</li>
+</ul>
+<hr>
+<h3 id="۱-ارسال-ساده-simple-send">۱. ارسال ساده (Simple Send)</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/simple">https://panel.persiafava.com/dashboard/send/simple</a></li>
+</ul>
+<p>این ماژول عمومی‌ترین روش ارسال پیامک است و شامل ۳ شیوه ورود گیرندگان می‌باشد:</p>
+<h4 id="روش-الف-وارد-کردن-شماره-به-صورت-دستی">روش الف: وارد کردن شماره به صورت دستی</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/simple/manual">https://panel.persiafava.com/dashboard/send/simple/manual</a></li>
+</ul>
+<p><img src="./images/send_simple_manual.png" alt="ارسال ساده به صورت دستی"></p>
+<p><strong>مراحل ۳ گانه ارسال دستی:</strong></p>
+<ul>
+<li>
+<p><strong>مرحله ۱: شماره و متن پیامک</strong></p>
+<ol>
+<li><em>شماره ارسال کننده:</em> خط مورد نظر (اختصاصی، خدماتی یا اشتراکی) را از فهرست انتخاب نمایید.</li>
+<li><em>شماره دریافت کننده:</em> شماره‌ها را به فرمت ۱۰ رقمی (مثلاً <code>9121234567</code>) درج کرده و کلید Enter را بزنید.</li>
+<li><em>متن پیامک:</em> متن را تایپ کنید؛ کاراکترشمار و تعداد صفحات همزمان محاسبه می‌شود.</li>
+<li><em>امکانات تکمیلی:</em>
+<ul>
+<li>فراخوانی سریع از <a href="https://panel.persiafava.com/dashboard/send/draft">فهرست پیش‌نویس‌ها</a>.</li>
+<li>اضافه کردن خودکار سربرگ یا امضای رسمی به پیام.</li>
+<li>استفاده از تگ‌های پویا.</li>
+</ul>
+</li>
+<li>کلیک بر روی دکمه <strong>«مرحله بعد»</strong>.</li>
+</ol>
+</li>
+<li>
+<p><strong>مرحله ۲: تنظیمات پیشرفته</strong></p>
+<ul>
+<li><em>نوع ارسال (فوری یا زمان‌دار):</em> تعیین روز و ساعت دقیق ارسال برای انتشار در آینده.</li>
+<li><em>ارسال تدریجی (نوبت‌بندی / Throttle):</em> تنظیم حجم ارسال در بازه‌های زمانی معین (مثلاً ارسال ۲۰۰ پیام در هر ۱۵ دقیقه) جهت کنترل تماس‌های ورودی.</li>
+<li><em>حذف شماره‌های تکراری:</em> پالایش خودکار رکوردهای تکراری در فهرست ورودی.</li>
+</ul>
+</li>
+<li>
+<p><strong>مرحله ۳: پیش‌نمایش و ارسال نهایی</strong></p>
+<ul>
+<li>مشاهده خلاصه سفارش شامل تعداد مخاطبان معتبر، صفحات پیامک، مجموع هزینه و مانده اعتبار پس از کسر. با تایید شما، ارسال آغاز می‌شود.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="روش-ب-ارسال-از-لیست-مخاطبین">روش ب: ارسال از لیست مخاطبین</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/simple/contacts">https://panel.persiafava.com/dashboard/send/simple/contacts</a></li>
+</ul>
+<p>در این شیوه نیازی به وارد کردن دستی شماره‌ها نیست:</p>
+<ol>
+<li>انتخاب خط فرستنده.</li>
+<li>انتخاب یک یا چند گروه از دفترچه تلفن ذخیره‌شده.</li>
+<li>امکان انتخاب تمامی اعضای گروه یا گلچین کردن چند مخاطب خاص از جدول.</li>
+<li>درج متن پیامک، اعمال تنظیمات زمان‌بندی و تایید نهایی.</li>
+</ol>
+<hr>
+<h4 id="روش-ج-ارسال-از-طریق-آپلود-فایل">روش ج: ارسال از طریق آپلود فایل</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/simple/file">https://panel.persiafava.com/dashboard/send/simple/file</a></li>
+</ul>
+<p>مناسب ارسال برای لیست‌هایی که در قالب فایل اکسل یا تکست آماده شده‌اند:</p>
+<ol>
+<li>انتخاب خط ارسال‌کننده.</li>
+<li>استفاده از دکمه‌های دانلود نمونه فایل اکسل (<code>xls / xlsx</code>) یا نمونه متنی (<code>txt</code>) جهت اطمینان از صحت ستون‌ها.</li>
+<li>بارگذاری فایل با کشیدن و رها کردن در کادر یا زدن دکمه «انتخاب فایل».</li>
+<li>بازبینی پیش‌نمایش شماره‌های استخراج‌شده و تعداد کل رکوردهای معتبر.</li>
+<li>امکان افزودن شماره‌های دستی تکمیلی در صورت نیاز و رفتن به گام بعدی.</li>
+</ol>
+<hr>
+<h3 id="۲-ارسال-هوشمند-smart-send">۲. ارسال هوشمند (Smart Send)</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/smart">https://panel.persiafava.com/dashboard/send/smart</a></li>
+</ul>
+<p><img src="./images/send_smart.png" alt="ارسال هوشمند پیامک"></p>
+<p>ارسال هوشمند برای کمپین‌هایی به کار می‌رود که هر پیامک دارای اطلاعات اختصاصی متغیر (مانند نام، مبلغ بدهی، شماره فاکتور یا کد پیگیری) برای هر شخص است:</p>
+<h4 id="۱-هوشمند-داینامیک">۱. هوشمند داینامیک</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/smart/dynamic">https://panel.persiafava.com/dashboard/send/smart/dynamic</a></li>
+<li>اتصال مستقیم به مشخصات ذخیره‌شده در دفترچه تلفن مخاطبان.</li>
+<li>امکان درج تگ‌هایی نظیر <code>{نام}</code>، <code>{نام خانوادگی}</code>، <code>{تلفن}</code> در متن پیام که هنگام ارسال با اطلاعات واقعی جایگزین می‌شوند.</li>
+</ul>
+<h4 id="۲-هوشمند-اکسل">۲. هوشمند اکسل</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/smart/excel">https://panel.persiafava.com/dashboard/send/smart/excel</a></li>
+<li>بارگذاری فایل اکسل شامل ستون‌های دلخواه (مثلاً ستون نام، شماره مشتری، تاریخ موعد).</li>
+<li>تبدیل خودکار ستون‌ها به تگ‌های متغیر (مانند <code>{#ستونB#}</code>).</li>
+<li>نگارش قالب یکپارچه: <em>«جناب {#ستونB#}، موعد سرویس خودروی شما {#ستونC#} است.»</em></li>
+</ul>
+<h4 id="۳-هوشمند-متناظر-آپلود-فایل">۳. هوشمند متناظر آپلود فایل</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/smart/equivalent-file">https://panel.persiafava.com/dashboard/send/smart/equivalent-file</a></li>
+<li>بارگذاری فایلی که در هر سطر آن علاوه بر شماره موبایل، متن پیامک کاملاً منحصربه‌فرد همان شخص قرار گرفته است.</li>
+</ul>
+<h4 id="۴-هوشمند-متناظر-دستی">۴. هوشمند متناظر دستی</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/smart/equivalent-manual">https://panel.persiafava.com/dashboard/send/smart/equivalent-manual</a></li>
+<li>تعریف مستقیم چندین پیام متفاوت برای چند شماره مختلف در یک فرم، با زدن دکمه «اضافه کردن فیلد جدید».</li>
+</ul>
+<hr>
+<h3 id="۳-ارسال-به-بانک-شماره-کشوری-و-منطقهای">۳. ارسال به بانک شماره کشوری و منطقه‌ای</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/bank">https://panel.persiafava.com/dashboard/send/bank</a></li>
+</ul>
+<p><img src="./images/send_bank.png" alt="ارسال به بانک شماره و نقشه"></p>
+<p>برای بازاریابی و تبلیغات هدفمند در مناطق یا اصناف مختلف کشور، بانک اطلاعاتی فرستا روش‌های زیر را ارائه می‌دهد:</p>
+<h4 id="الف-به-تفکیک-شهر-و-کد-پستی">الف) به تفکیک شهر و کد پستی</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/bank/postal-code">https://panel.persiafava.com/dashboard/send/bank/postal-code</a></li>
+</ul>
+<ol>
+<li>انتخاب شهر مورد نظر از روی فهرست شهرهای تحت پوشش.</li>
+<li>درج ۳ تا ۵ رقم آغازین کد پستی منطقه و زدن دکمه <strong>جستجو</strong>.</li>
+<li>تفکیک نوع سیم‌کارت (دائمی، اعتباری یا هر دو).</li>
+<li>تعیین تعداد شماره و ردیف شروع، و انتخاب چینش (از اول به آخر یا برعکس).</li>
+<li>کلیک بر روی گزینه <strong>افزودن به سبد دریافت کنندگان</strong> جهت ارسال یکپارچه.</li>
+</ol>
+<h4 id="ب-خطوط-همراه-اول-به-تفکیک-استان-و-شهر">ب) خطوط همراه اول به تفکیک استان و شهر</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/bank/mci">https://panel.persiafava.com/dashboard/send/bank/mci</a></li>
+<li>انتخاب استان و شهر مقصد با امکان فیلتر خطوط همراه اول دائمی یا اعتباری.</li>
+</ul>
+<h4 id="ج-ارسال-با-جستجوی-سرشماره">ج) ارسال با جستجوی سرشماره</h4>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/bank/prefix">https://panel.persiafava.com/dashboard/send/bank/prefix</a></li>
+<li>جستجو و فیلتر بر اساس پیش‌شماره‌های اختصاصی اپراتوری در سراسر کشور.</li>
+</ul>
+<h4 id="د-بانک-مشاغل-و-اصناف-کشوری-و-استانی">د) بانک مشاغل و اصناف کشوری و استانی</h4>
+<ul>
+<li>دسته‌بندی بر اساس صنف شغلی فعال (پزشکان، مهندسان، وکلا، املاک، ساختمان، فروشگاه‌ها و بازرگانان).</li>
+</ul>
+<h4 id="هـ-ارسال-از-روی-نقشه-bts">هـ) ارسال از روی نقشه (BTS)</h4>
+<ul>
+<li>انتخاب موقعیت مکانی و محله‌ها روی نقشه آنلاین جهت ارسال به شماره‌های تحت پوشش دکل‌های مخابراتی منطقه.</li>
+</ul>
+<hr>
+<h3 id="۴-مدیریت-پیشنویسهای-پیامک">۴. مدیریت پیش‌نویس‌های پیامک</h3>
+<ul>
+<li>
+<p><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/send/draft">https://panel.persiafava.com/dashboard/send/draft</a></p>
+</li>
+<li>
+<p>امکان ایجاد و ویرایش پیام‌های پرتکرار (مانند پیامک خوش‌آمدگویی، اعلام تعطیلی، آدرس یا مشخصات شبا).</p>
+</li>
+<li>
+<p>در تمامی فرم‌های ارسال و منشی، دسترسی فوری به پیش‌نویس‌ها با یک کلیک فراهم است.</p>
+</li>
+</ul>
+<hr>
+<h2 id="۵-دفترچه-تلفن-و-مدیریت-مخاطبین">۵. دفترچه تلفن و مدیریت مخاطبین</h2>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/groups">https://panel.persiafava.com/dashboard/groups</a></li>
+</ul>
+<p><img src="./images/contacts_groups.png" alt="مدیریت مخاطبین و گروه‌ها"></p>
+<h3 id="مدیریت-گروهها">مدیریت گروه‌ها</h3>
+<ul>
+<li><strong>ایجاد گروه جدید:</strong> با انتخاب گزینه «ایجاد گروه جدید»، می‌توانید گروه‌بندی‌های اختصاصی (مانند مشتریان ویژه، نمایندگان، پرسنل) بسازید.</li>
+<li><strong>فهرست گروه‌ها:</strong> شامل شناسه یکتا، نام، تعداد اعضا، تاریخ ثبت و دکمه‌های مشاهده اعضا، ویرایش نام یا حذف گروه.</li>
+</ul>
+<hr>
+<h3 id="۵-شیوه-افزودن-مخاطب-به-سامانه">۵ شیوه افزودن مخاطب به سامانه</h3>
+<p>در صفحه مخاطبان هر گروه، با زدن دکمه «افزودن مخاطب جدید» پنج مسیر متنوع برای اضافه کردن اطلاعات در اختیارتان قرار می‌گیرد:</p>
+<pre><code class="language-mermaid"><div class="mermaid">graph TD
+    AddContact["افزودن مخاطب جدید"]
+    AddContact --> M1["۱. وارد کردن تکی (پروفایل اختصاصی و مناسبت‌ها)"]
+    AddContact --> M2["۲. آپلود فایل (ورود دسته‌ای اکسل و تکست)"]
+    AddContact --> M3["۳. انتقال از گروه‌های دیگر (کپی یا جابجایی انتخابی)"]
+    AddContact --> M4["۴. وارد کردن رنجی (تولید دامنه متوالی شماره‌ها)"]
+    AddContact --> M5["۵. وارد کردن دستی دسته‌ای (پیست یکجای شماره‌ها)"]
+</div></code></pre>
+<h4 id="۱-وارد-کردن-به-صورت-تکی">۱. وارد کردن به صورت تکی</h4>
+<ul>
+<li>ثبت دقیق مشخصات یک فرد:
+<ul>
+<li>شماره موبایل (اجباری و ۱۰ رقمی بدون صفر).</li>
+<li>نام و نام خانوادگی فارسی (اجباری).</li>
+<li>جنسیت (جهت تطبیق خودکار پیشوند جناب آقای یا سرکار خانم در ارسال‌های هوشمند).</li>
+<li>نام و فامیلی لاتین (اختیاری).</li>
+<li>اتصال تاریخ رویداد و مناسبت اختصاصی (تولد، سالگرد، تمدید بیمه).</li>
+</ul>
+</li>
+</ul>
+<h4 id="۲-آپلود-فایل">۲. آپلود فایل</h4>
+<ul>
+<li>مسیر آپلود گروهی: <a href="https://panel.persiafava.com/dashboard/send/smart/equivalent-file">https://panel.persiafava.com/dashboard/send/smart/equivalent-file</a></li>
+<li>ورود فایل‌های اکسل و متنی پرحجم شامل اطلاعات و شماره‌های مشتریان.</li>
+</ul>
+<h4 id="۳-انتقال-از-گروههای-دیگر">۳. انتقال از گروه‌های دیگر</h4>
+<ul>
+<li>انتخاب گروه مبدأ و تیک‌زدن مخاطبان منتخب جهت کپی یا جابجایی کامل به گروه مقصد.</li>
+</ul>
+<h4 id="۴-وارد-کردن-به-صورت-رنجی">۴. وارد کردن به صورت رنجی</h4>
+<ul>
+<li>تعیین شماره شروع (مثلاً <code>9120000000</code>) و شماره پایان (مثلاً <code>9120000099</code>) جهت تولید و ذخیره خودکار صدها شماره پیاپی.</li>
+</ul>
+<h4 id="۵-وارد-کردن-دستی-دستهای">۵. وارد کردن دستی دسته‌ای</h4>
+<ul>
+<li>کادر متنی برای کپی و جای‌گذاری همزمان لیستی از شماره‌ها؛ سامانه به صورت هوشمند شماره‌ها را از خطوط و ویرگول‌ها شناسایی می‌کند.</li>
+</ul>
+<hr>
+<h3 id="عملیات-و-امکانات-روی-مخاطبین-پس-از-ایجاد">عملیات و امکانات روی مخاطبین پس از ایجاد</h3>
+<p>در جدول مخاطبان گروه، امکانات زیر در دسترس است:</p>
+<ol>
+<li><strong>عملیات گروهی (Bulk Actions):</strong> علامت‌زدن چند مخاطب جهت حذف، خروجی یا انتقال یکجا.</li>
+<li><strong>فیلتر و جستجوی آنی:</strong> جستجوی فوری بر اساس نام، نام خانوادگی یا شماره تلفن.</li>
+<li><strong>تنظیم تعداد نمایش:</strong> تغییر تعداد ردیف‌ها از ۱۰ تا ۳۰۰ مخاطب در صفحه.</li>
+<li><strong>ویرایش مخاطب:</strong> به‌روزرسانی مشخصات و مناسبت‌های ثبت‌شده برای هر فرد.</li>
+<li><strong>حذف مخاطب:</strong> حذف رکورد از لیست گروه.</li>
+</ol>
+<hr>
+<h3 id="مدیریت-رویدادها-و-مناسبتهای-هوشمند">مدیریت رویدادها و مناسبت‌های هوشمند</h3>
+<p>از طریق بخش «مدیریت رویدادها» در صفحه <a href="https://panel.persiafava.com/dashboard/groups">مخاطبین</a>، می‌توانید پیام‌های مناسبتی را خودکار کنید:</p>
+<ul>
+<li>تعریف رویداد (تبریک تولد، سالگرد تاسیس، تاریخ سررسید بیمه، تمدید قرارداد).</li>
+<li>تعیین ساعت ارسال روزانه و انتخاب خط اختصاصی.</li>
+<li>سیستم در تاریخ معین، پیام شخصی‌سازی‌شده را بر اساس نام و جنسیت مخاطب به شکل خودکار ارسال خواهد کرد.</li>
+</ul>
+<hr>
+<h2 id="۶-امکانات-ویژه-و-تعاملی">۶. امکانات ویژه و تعاملی</h2>
+<h3 id="منشی-پیامکی-sms-assist">منشی پیامکی (SMS Assist)</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/specials/sms-assist">https://panel.persiafava.com/dashboard/specials/sms-assist</a></li>
+</ul>
+<p><img src="./images/sms_assist.png" alt="منشی پیامکی فرستا"></p>
+<p>منشی پیامکی، خط اختصاصی شما را به سامانه‌ای هوشمند برای پاسخگویی ۲۴ ساعته تبدیل می‌کند:</p>
+<h4 id="مراحل-ایجاد-منشی-جدید">مراحل ایجاد منشی جدید:</h4>
+<ul>
+<li><strong>آدرس مستقیم فرم ایجاد:</strong> <a href="https://panel.persiafava.com/dashboard/specials/sms-assist/create">https://panel.persiafava.com/dashboard/specials/sms-assist/create</a></li>
+</ul>
+<ol>
+<li><strong>مشخصات اولیه:</strong>
+<ul>
+<li>تعیین عنوان منشی جهت دسته‌بندی.</li>
+<li>انتخاب خط اختصاصی پاسخگو.</li>
+<li>ثبت کلمه کلیدی (مانند ارسال عدد <code>1</code> یا واژه <code>کاتالوگ</code>).</li>
+<li>فعال‌سازی پاسخ خودکار و تایپ متن پیامی که بلافاصله به مخاطب ارسال خواهد شد.</li>
+</ul>
+</li>
+<li><strong>تنظیمات پیشرفته:</strong>
+<ul>
+<li>افزودن خودکار شماره فرستنده به یک گروه مشخص در دفترچه تلفن جهت جمع‌آوری سرنخ‌های فروش.</li>
+<li>تعیین بازه زمانی فعالیت منشی.</li>
+</ul>
+</li>
+<li><strong>پیش‌نمایش و فعال‌سازی:</strong> بررسی نهایی و فعال‌سازی سرویس.</li>
+</ol>
+<hr>
+<h3 id="مسابقه-نظرسنجی-و-قرعهکشی">مسابقه، نظرسنجی و قرعه‌کشی</h3>
+<ul>
+<li><strong>مسابقه پیامکی:</strong> طرح سوال چهارگزینه‌ای، تعیین گزینه صحیح و ارسال خودکار پیام امتیاز یا سپاسگزاری.</li>
+<li><strong>نظرسنجی:</strong> دریافت نظرات و امتیازدهی مشتریان و استخراج نمودارهای درصدی در پنل.</li>
+<li><strong>قرعه‌کشی و کدخوان:</strong> اعتبارسنجی کدهای محصول یا بن‌های تخفیف با جلوگیری از ثبت کدهای تکراری.</li>
+</ul>
+<hr>
+<h3 id="نوبتدهی-و-تحلیلگر">نوبت‌دهی و تحلیلگر</h3>
+<ul>
+<li><strong>نوبت‌دهی:</strong> ارسال پیام تایید تاریخ، ساعت و نشانی به مراجعان، به همراه یادآوری خودکار پیش از زمان نوبت.</li>
+<li><strong>تحلیلگر:</strong> گزارش بازدهی و نرخ تعامل مشتریان با پیامک‌های ارسالی هر خط.</li>
+</ul>
+<hr>
+<h2 id="۷-گزارشها-پیگیری-وضعیت-تحویل-و-خروجی-اکسل">۷. گزارش‌ها، پیگیری وضعیت تحویل و خروجی اکسل</h2>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/reports">https://panel.persiafava.com/dashboard/reports</a></li>
+</ul>
+<p><img src="./images/reports.png" alt="گزارشات ارسال پیامک"></p>
+<p>هر سفارش ارسال پیامک دارای شناسه پیگیری یکتا (Tracking ID) است:</p>
+<h3 id="انواع-گزارشها">انواع گزارش‌ها:</h3>
+<ol>
+<li><strong>گزارش ارسال‌های اخیر:</strong> نمایش آخرین بسته‌های ارسالی با جزئیات خط، زمان، هزینه و تعداد گیرندگان.</li>
+<li><strong>پیام‌های دریافتی (Inbox):</strong> صندوق ورودی پیامک‌های مشتریان با امکان پاسخ مستقیم.</li>
+<li><strong>پیام‌های زمان‌بندی‌شده:</strong> تقویم پیام‌های آینده با قابلیت بازبینی یا لغو پیش از موعد ارسال.</li>
+<li><strong>گزارش وب‌سرویس:</strong> لاگ فراخوانی متدهای ارسالی از طریق وب‌سرویس.</li>
+<li><strong>خروجی جامع اکسل و وضعیت دلیوری:</strong> امکان گزارش‌گیری در بازه زمانی دلخواه با تفکیک وضعیت‌های زیر:
+<ul>
+<li><strong>رسیده به گوشی (Delivered):</strong> پیام با موفقیت روی دستگاه مخاطب تحویل شده است.</li>
+<li><strong>رسیده به مخابرات (Sent to Telco):</strong> پیامک در صف اپراتور جهت تحویل قرار دارد.</li>
+<li><strong>لیست سیاه (Blacklist):</strong> مشترک دریافت پیامک تبلیغاتی را مسدود کرده و هزینه آن طبق ضوابط به اعتبار کاربر بازمی‌گردد.</li>
+<li><strong>ارسال ناموفق / خاموش:</strong> عدم دسترسی به خط یا خاموش بودن تلفن مخاطب.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="۸-تنظیمات-حساب-شخصیسازی-و-امنیت-پیشرفته">۸. تنظیمات حساب، شخصی‌سازی و امنیت پیشرفته</h2>
+<h3 id="تنظیمات-پروفایل">تنظیمات پروفایل</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/profile/setting">https://panel.persiafava.com/dashboard/profile/setting</a></li>
+</ul>
+<p><img src="./images/settings.png" alt="تنظیمات و امنیت حساب"></p>
+<ul>
+<li>ویرایش اطلاعات تماس، نام تجاری، کلمه کلیدی دریافت عمومی و تصویر نمایه.</li>
+<li><strong>تغییر رمز عبور:</strong> به‌روزرسانی دوره‌ای اطلاعات امنیتی ورود.</li>
+<li><strong>ورود دو مرحله‌ای (2FA):</strong> افزایش ضریب امنیت حساب با الزام دریافت کد تایید پیامکی هنگام لاگین.</li>
+<li><strong>تنظیم اعلان‌ها:</strong> هشدارهای پیامکی کاهش اعتبار از حد معین یا ورود از آی‌پی جدید.</li>
+</ul>
+<hr>
+<h3 id="شخصیسازی-پیشرفته-پیامها">شخصی‌سازی پیشرفته پیام‌ها</h3>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/profile/message-customization">https://panel.persiafava.com/dashboard/profile/message-customization</a></li>
+</ul>
+<p>رفتار پیش‌فرض و لحن پیام‌های ارسالی را متناسب با هویت برند خود یکپارچه کنید:</p>
+<ol>
+<li><strong>پیشوندهای جنسیت مخاطب:</strong>
+<ul>
+<li>پیش‌فرض مرد فارسی (مانند «جناب آقای»)</li>
+<li>پیش‌فرض مرد لاتین (مانند «jenabe aghaye»)</li>
+<li>پیش‌فرض زن فارسی (مانند «سرکار خانم»)</li>
+<li>پیش‌فرض زن لاتین (مانند «sarkar khanome»)</li>
+</ul>
+</li>
+<li><strong>سربرگ و امضای سرتاسری:</strong>
+<ul>
+<li><strong>متن سربرگ:</strong> متنی که در خط آغازین کلیه پیام‌ها درج می‌شود.</li>
+<li><strong>متن امضا:</strong> اطلاعات ثابت پایان پیام (مانند شماره تلفن یا وب‌سایت پشتیبانی).</li>
+</ul>
+</li>
+<li><strong>قالب‌های پیش‌فرض هوشمند:</strong>
+<ul>
+<li>تنظیم الگوهای تخصصی برای آژانس‌های هواپیمایی، نمایندگی‌های بیمه، آزمایشگاه‌ها، صورتحساب‌های مالی و تبریک‌های مناسبتی.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="انتقال-پیامک-و-وبهوک">انتقال پیامک و وب‌هوک</h3>
+<ul>
+<li><strong>انتقال به موبایل (SMS Forwarding):</strong> دایورت مستقیم پیامک‌های دریافتی از مشتریان به شماره موبایل مدیر.</li>
+<li><strong>وب‌هوک (Webhook URL):</strong> ارسال خودکار داده‌های پیام دریافتی در قالب متد POST به آدرس سرور شما جهت ادغام با نرم‌افزارهای داخلی و سیستم‌های CRM.</li>
+</ul>
+<hr>
+<h2 id="۹-امور-مالی-و-افزایش-اعتبار">۹. امور مالی و افزایش اعتبار</h2>
+<ol>
+<li><strong>شارژ آنلاین حساب:</strong>
+<ul>
+<li>آدرس ورود: <a href="https://panel.persiafava.com/dashboard/financial/charge">https://panel.persiafava.com/dashboard/financial/charge</a></li>
+<li>تعیین مبلغ دلخواه به ریال، اتصال به درگاه پرداخت شاپرک و افزایش آنی اعتبار.</li>
+</ul>
+</li>
+<li><strong>ثبت فیش بانکی:</strong>
+<ul>
+<li>آدرس ورود: <a href="https://panel.persiafava.com/dashboard/financial/register-slip">https://panel.persiafava.com/dashboard/financial/register-slip</a></li>
+<li>ثبت شماره فیش واریزی، تاریخ و تصویر فیش در پرداخت‌های کارت به کارت، پایا یا ساتنا جهت تایید کارشناسان مالی.</li>
+</ul>
+</li>
+<li><strong>تاریخچه تراکنش‌ها:</strong>
+<ul>
+<li>آدرس ورود: <a href="https://panel.persiafava.com/dashboard/financial/history">https://panel.persiafava.com/dashboard/financial/history</a></li>
+<li>گزارش گردش مالی، مبالغ کسرشده کمپین‌ها، مالیات بر ارزش افزوده و دریافت صورتحساب‌ها.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="۱۰-مرکز-پشتیبانی-و-تیکتینگ">۱۰. مرکز پشتیبانی و تیکتینگ</h2>
+<ul>
+<li><strong>آدرس مستقیم در پنل:</strong> <a href="https://panel.persiafava.com/dashboard/support">https://panel.persiafava.com/dashboard/support</a></li>
+</ul>
+<p>در صورت بروز هرگونه ابهام، پیگیری خطوط یا نیاز به خدماتی‌سازی:</p>
+<ol>
+<li>در <a href="https://panel.persiafava.com/dashboard/support">صفحه پشتیبانی</a> بر روی دکمه «ایجاد تیکت جدید» کلیک کنید.</li>
+<li>واحد مربوطه (پشتیبانی فنی، امور مالی یا فروش) و میزان اهمیت تیکت را تعیین نمایید.</li>
+<li>عنوان و شرح پیام را وارد کرده و در صورت نیاز، فایل یا اسکرین‌شات ضمیمه کنید.</li>
+<li>پاسخ کارشناسان از طریق همین بخش قابل پیگیری بوده و اطلاع‌رسانی پیامکی نیز انجام می‌شود.</li>
+</ol>
+
+</body>
+</html>

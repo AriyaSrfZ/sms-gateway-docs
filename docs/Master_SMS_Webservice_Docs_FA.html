@@ -1594,7 +1594,7 @@ curl_close(<span class="var">$ch</span>);</pre>
   <span class="key">"userInfo"</span>: {
     <span class="key">"Username"</span>:   <span class="str">"نام_کاربری"</span>,
     <span class="key">"Fullname"</span>:   <span class="str">"نام کامل"</span>,
-    <span class="key">"Email"</span>:      <span class="str">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8beee6eae2e7cbeef3eae6fbe7eea5e8e4e6">[email&#160;protected]</a>"</span>,
+    <span class="key">"Email"</span>:      <span class="str">"email@example.com"</span>,
     <span class="key">"Mobile"</span>:     <span class="str">"+989132125459"</span>,
     <span class="key">"Cash"</span>:       <span class="num">40034755</span>,      <span class="cmt">// موجودی (ریال)</span>
     <span class="key">"Date"</span>:       <span class="num">1667161800</span>,   <span class="cmt">// تاریخ ثبت‌نام (Unix)</span>
@@ -1974,7 +1974,7 @@ app = <span class="fn">Flask</span>(__name__)
 </main>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Tab switching (data-lang based, no ID dependency) ─────────
 function selectTab(btn) {
   var lang = btn.getAttribute('data-lang');
@@ -2056,68 +2056,6 @@ var observer = new IntersectionObserver(function(entries) {
   });
 }, { rootMargin: '-15% 0px -75% 0px' });
 sections.forEach(function(s){ observer.observe(s); });
-</script><script>
-// ─── Language tabs ───────────────────────────────────────────
-function switchLang(btn, group, lang) {
-  // 1. Deactivate all tabs in this tab-bar only
-  btn.closest('.lang-tabs').querySelectorAll('.lang-tab')
-     .forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  // 2. Find target panel, hide all siblings with same group prefix
-  const target = document.getElementById(group + '-' + lang);
-  if (!target) return;
-  target.parentElement.querySelectorAll('.code-panel')
-        .forEach(p => p.classList.remove('active'));
-  target.classList.add('active');
-}
-
-// ─── Response tabs ───────────────────────────────────────────
-function switchResp(btn, panelId) {
-  const wrap = btn.closest('.ep-body');
-  wrap.querySelectorAll('.resp-tab').forEach(b => b.classList.remove('active'));
-  wrap.querySelectorAll('.resp-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(panelId).classList.add('active');
-}
-
-// ─── Copy code ───────────────────────────────────────────────
-function copyCode(btn) {
-  // Find the nearest pre — look up to code-header parent, then find pre sibling
-  const header = btn.closest('.code-header');
-  const pre = header ? header.parentElement.querySelector('pre') : btn.closest('.code-panel, .code-wrap').querySelector('pre');
-  if (!pre) return;
-  navigator.clipboard.writeText(pre.innerText).then(() => {
-    const orig = btn.textContent;
-    btn.textContent = 'copied!';
-    setTimeout(() => btn.textContent = orig, 1800);
-  }).catch(() => {
-    // fallback for older browsers
-    const sel = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(pre);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    document.execCommand('copy');
-    sel.removeAllRanges();
-    const orig = btn.textContent;
-    btn.textContent = 'copied!';
-    setTimeout(() => btn.textContent = orig, 1800);
-  });
-}
-function copyText(text, btn) {
-  navigator.clipboard.writeText(text).then(() => {
-    const orig = btn.textContent;
-    btn.textContent = 'کپی شد!';
-    setTimeout(() => btn.textContent = orig, 1800);
-  });
-}
-
-// ─── Active nav on scroll ────────────────────────────────────
-const sections = document.querySelectorAll('section[id], .hero[id]');
-const navLinks = document.querySelectorAll('.nav a');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('active'));
-      const link =
+</script>
+</body>
+</html>

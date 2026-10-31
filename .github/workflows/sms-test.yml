@@ -1,4 +1,3 @@
-```yaml
 name: SMS Gateway Smoke Test
 
 on:
@@ -108,4 +107,3 @@ jobs:
             exit 1
           fi
           echo "sms_send OK"
-```

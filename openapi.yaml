@@ -1,0 +1,770 @@
+openapi: 3.0.3
+info:
+  title: Persia Fava Telecom SMS Gateway API
+  version: 2.1.0
+  description: >-
+    Carrier-grade SMS messaging web services providing REST and ESB v2
+    microservices for transactional OTP dispatch, sliding-window bulk broadcast,
+    peer-to-peer delivery, delivery reports (DLR), and inbound messaging.
+  contact:
+    name: Persia Fava Support & Integration Team
+    url: https://sms.persiafava.com
+    email: support@persiafava.com
+servers:
+  - url: http://sms.persiafava.com/webservice/rest
+    description: Production REST Web Service Gateway
+  - url: https://sms.persiafava.com:{port}
+    description: Production ESB v2 Microservices Switch
+    variables:
+      port:
+        default: '3000'
+        description: Target microservice port (3000=P2P, 3001=Bulk, 3002=Otp, 3003=Delivery, 3004=ReceivedList, 3005=ReceivedChangeRead, 3006=UserInfo)
+        enum:
+          - '3000'
+          - '3001'
+          - '3002'
+          - '3003'
+          - '3004'
+          - '3005'
+          - '3006'
+tags:
+  - name: REST Web Service
+    description: Core RESTful web service endpoints for single/bulk SMS, DLR, and account balance.
+  - name: ESB v2 Microservices
+    description: High-performance microservice endpoints for high-throughput transactional and bulk dispatch.
+
+paths:
+  /user_info:
+    get:
+      tags:
+        - REST Web Service
+      summary: Get User Account Details and Balance
+      operationId: restGetUserInfo
+      description: Returns account balance (in Rials), expiration date, and assigned dedicated sender numbers.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: api_key
+          in: query
+          required: false
+          description: API key for authentication.
+          schema:
+            type: string
+            example: "YOUR_REST_API_KEY"
+        - name: login_username
+          in: query
+          required: false
+          description: Account username (alternative to api_key).
+          schema:
+            type: string
+        - name: login_password
+          in: query
+          required: false
+          description: Account password (alternative to api_key).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestUserInfoResponse'
+              example:
+                result: true
+                list:
+                  username: "admin_user"
+                  cash: "3212509"
+                  date_expire: "1405/02/24 00:00"
+                number:
+                  list_user:
+                    - number: "3000569999"
+
+  /sms_send:
+    post:
+      tags:
+        - REST Web Service
+      summary: Submit Single, Bulk, or Peer-to-Peer SMS Messages
+      operationId: restSendSms
+      description: Dispatches one or more SMS messages via carrier lines with URL-encoded parameters.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RestSendSmsRequest'
+      responses:
+        '200':
+          description: Messages accepted by the carrier switch.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSendSmsResponse'
+              example:
+                result: true
+                list:
+                  - 489218491
+
+  /sms_deliver:
+    get:
+      tags:
+        - REST Web Service
+      summary: Query SMS Delivery Reports (DLR)
+      operationId: restGetDeliveryStatus
+      description: Checks delivery status codes for one or more message IDs.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: API access key.
+          schema:
+            type: string
+        - name: smsid[]
+          in: query
+          required: true
+          description: Array of message IDs to check.
+          schema:
+            type: array
+            items:
+              type: integer
+          example: [489218491]
+        - name: dargah
+          in: query
+          required: false
+          description: Port or gateway identifier (e.g., 3000).
+          schema:
+            type: string
+            default: "3000"
+      responses:
+        '200':
+          description: Delivery statuses for the requested message IDs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestDeliveryResponse'
+              example:
+                result: true
+                list:
+                  "489218491": 2
+
+  /sms_receive_list:
+    get:
+      tags:
+        - REST Web Service
+      summary: Retrieve Inbound Messages
+      operationId: restGetReceivedList
+      description: Returns inbound SMS messages sent by users to dedicated receiving lines.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: API access key.
+          schema:
+            type: string
+        - name: page_number
+          in: query
+          required: false
+          description: Pagination page index.
+          schema:
+            type: integer
+            default: 1
+        - name: perpage
+          in: query
+          required: false
+          description: Number of records per page.
+          schema:
+            type: integer
+            default: 20
+        - name: read
+          in: query
+          required: false
+          description: Read filter status (0=unread, 1=read).
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+      responses:
+        '200':
+          description: Paginated list of inbound messages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestReceivedListResponse'
+
+  /sms_receive_change_read:
+    get:
+      tags:
+        - REST Web Service
+      summary: Mark Inbound Messages as Read
+      operationId: restMarkReceivedRead
+      description: Updates the read status of received SMS messages.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: API access key.
+          schema:
+            type: string
+        - name: ids[]
+          in: query
+          required: true
+          description: List of received message IDs to update.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: read
+          in: query
+          required: true
+          description: New read status flag (0 or 1).
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 1
+      responses:
+        '200':
+          description: Status change confirmation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: true
+                required:
+                  - result
+
+  /UserInfo:
+    get:
+      tags:
+        - ESB v2 Microservices
+      summary: Query Account User Info & Cash Balance (ESB v2)
+      operationId: esbGetUserInfo
+      description: Returns account metadata, credit balance (Rials), and registration date via ESB microservice on port 3006.
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: Account information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbUserInfoResponse'
+              example:
+                status: 0
+                userInfo:
+                  Username: "admin_user"
+                  Fullname: "Persia Fava Admin"
+                  Email: "admin@example.com"
+                  Mobile: "+989132125459"
+                  Cash: 40034755
+                  Date: 1667161800
+
+  /PeerToPeer:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Submit Peer-to-Peer Individualized Messages (ESB v2)
+      operationId: esbSendPeerToPeer
+      description: Dispatches individualized messages with matched sender, recipient, and content arrays via port 3000.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EsbPeerToPeerRequest'
+      responses:
+        '200':
+          description: Messages accepted by the ESB router.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbBatchResponse'
+              example:
+                status: 0
+                smsids:
+                  - "9918237123"
+                cost: 250000
+
+  /Bulk:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Submit Broadcast Message to Multiple Recipients (ESB v2)
+      operationId: esbSendBulk
+      description: Sends an identical message body to an array of recipients from a single sender line via port 3001.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EsbBulkRequest'
+      responses:
+        '200':
+          description: Bulk broadcast queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbBatchResponse'
+              example:
+                status: 0
+                smsids:
+                  - "9918237124"
+                  - "9918237125"
+
+  /Otp:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Submit High-Priority Transactional OTP (ESB v2)
+      operationId: esbSendOtp
+      description: High-priority low-latency dispatch for verification codes and account security alerts via port 3002.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EsbOtpRequest'
+      responses:
+        '200':
+          description: OTP message queued for immediate delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbOtpResponse'
+              example:
+                status: 0
+                smsid: "9918237126"
+
+  /Delivery:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Query Status Delivery for Batch Message IDs (ESB v2)
+      operationId: esbGetDelivery
+      description: Inquires carrier delivery statuses for an array of SMS IDs via port 3003.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+              example: ["9918237126"]
+      responses:
+        '200':
+          description: Array of delivery reports.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbDeliveryResponse'
+
+  /ReceivedList:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Query Inbound Messages (ESB v2)
+      operationId: esbGetReceivedList
+      description: Fetches inbound SMS received on dedicated numbers via port 3004.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EsbReceivedListRequest'
+      responses:
+        '200':
+          description: Inbound messages list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsbReceivedListResponse'
+
+  /ReceivedChangeRead:
+    post:
+      tags:
+        - ESB v2 Microservices
+      summary: Update Inbound Message Read Status (ESB v2)
+      operationId: esbChangeReceivedRead
+      description: Updates the read/unread status flag for incoming messages via port 3005.
+      security:
+        - BasicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EsbChangeReadRequest'
+      responses:
+        '200':
+          description: Read status updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 0
+                required:
+                  - status
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Persia Fava REST API secret key.
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication for ESB v2 microservices.
+
+  schemas:
+    RestUserInfoResponse:
+      type: object
+      properties:
+        result:
+          type: boolean
+          example: true
+        list:
+          type: object
+          properties:
+            username:
+              type: string
+            cash:
+              type: string
+            date_expire:
+              type: string
+        number:
+          type: object
+          properties:
+            list_user:
+              type: array
+              items:
+                type: object
+                properties:
+                  number:
+                    type: string
+      required:
+        - result
+
+    RestSendSmsRequest:
+      type: object
+      required:
+        - api_key
+        - sender_number
+        - receiver_number
+        - note_arr
+      properties:
+        api_key:
+          type: string
+          description: API key.
+        sender_number:
+          type: string
+          description: Registered sender line (e.g., 3000...).
+          example: "3000569999"
+        receiver_number:
+          type: string
+          description: Destination phone number or comma-separated list.
+          example: "09123456789"
+        note_arr:
+          type: array
+          items:
+            type: string
+          description: Array of message contents.
+          example: ["Hello from Persia Fava SMS"]
+        dargah:
+          type: string
+          description: Telecom routing gateway port.
+          default: "3000"
+        tb_name_in_smsid:
+          type: string
+          description: Optional custom tracking tag.
+
+    RestSendSmsResponse:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: boolean
+          example: true
+        list:
+          type: array
+          items:
+            type: integer
+          example: [489218491]
+
+    RestDeliveryResponse:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: boolean
+          example: true
+        list:
+          type: object
+          additionalProperties:
+            type: integer
+            description: Status code (0=Sent, 1=In transit, 2=Delivered to handset, 8=Blacklist/Failed)
+          example:
+            "489218491": 2
+
+    RestReceivedListResponse:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: boolean
+          example: true
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              sender:
+                type: string
+              receiver:
+                type: string
+              content:
+                type: string
+              date:
+                type: string
+              read:
+                type: integer
+
+    EsbUserInfoResponse:
+      type: object
+      required:
+        - status
+        - userInfo
+      properties:
+        status:
+          type: integer
+          example: 0
+        userInfo:
+          type: object
+          properties:
+            Username:
+              type: string
+            Fullname:
+              type: string
+            Email:
+              type: string
+            Mobile:
+              type: string
+            Cash:
+              type: integer
+            Date:
+              type: integer
+
+    EsbPeerToPeerRequest:
+      type: object
+      required:
+        - senders
+        - recipients
+        - messages
+      properties:
+        senders:
+          type: array
+          items:
+            type: string
+          example: ["3000569999"]
+        recipients:
+          type: array
+          items:
+            type: string
+          example: ["09123456789"]
+        messages:
+          type: array
+          items:
+            type: string
+          example: ["Hello recipient 1"]
+        uids:
+          type: array
+          items:
+            type: string
+          example: ["uid-req-101"]
+
+    EsbBulkRequest:
+      type: object
+      required:
+        - sender
+        - recipients
+        - message
+      properties:
+        sender:
+          type: string
+          example: "3000569999"
+        recipients:
+          type: array
+          items:
+            type: string
+          example: ["09123456789", "09139876543"]
+        message:
+          type: string
+          example: "Broadcast notification to all active subscribers."
+
+    EsbOtpRequest:
+      type: object
+      required:
+        - sender
+        - recipient
+        - message
+      properties:
+        sender:
+          type: string
+          example: "3000569999"
+        recipient:
+          type: string
+          example: "09123456789"
+        message:
+          type: string
+          example: "Your verification code is: 482910"
+        uid:
+          type: string
+          example: "otp-session-7819"
+
+    EsbOtpResponse:
+      type: object
+      required:
+        - status
+        - smsid
+      properties:
+        status:
+          type: integer
+          example: 0
+        smsid:
+          type: string
+          example: "9918237126"
+
+    EsbBatchResponse:
+      type: object
+      required:
+        - status
+        - smsids
+      properties:
+        status:
+          type: integer
+          example: 0
+        smsids:
+          type: array
+          items:
+            type: string
+          example: ["9918237124", "9918237125"]
+        cost:
+          type: integer
+          example: 250000
+
+    EsbDeliveryResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: integer
+          example: 0
+        delivery:
+          type: array
+          items:
+            type: object
+            properties:
+              smsid:
+                type: string
+              status:
+                type: integer
+                description: Status code (0=Pending, 1=Sent to carrier, 2=Delivered, 8=Blacklist/Failed)
+              date:
+                type: integer
+
+    EsbReceivedListRequest:
+      type: object
+      properties:
+        page_number:
+          type: integer
+          default: 1
+        perpage:
+          type: integer
+          default: 20
+        read:
+          type: integer
+          enum: [0, 1]
+          default: 0
+        ordermode:
+          type: string
+          enum: ["ASC", "DESC"]
+          default: "DESC"
+        count:
+          type: boolean
+          default: true
+
+    EsbReceivedListResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: integer
+          example: 0
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              sender:
+                type: string
+              recipient:
+                type: string
+              message:
+                type: string
+              date:
+                type: integer
+              read:
+                type: integer
+        total:
+          type: integer
+          example: 42
+
+    EsbChangeReadRequest:
+      type: object
+      required:
+        - read
+        - ids
+      properties:
+        read:
+          type: integer
+          enum: [0, 1]
+          example: 1
+        ids:
+          type: array
+          items:
+            type: string
+          example: ["102931"]

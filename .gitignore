@@ -1,0 +1,16 @@
+# Temporary archives and backups
+*.bak
+*.tar.gz
+docs/Feresta_SMS_Panel_Docs/
+
+# Newman & Postman local test artifacts
+postman-env.json
+newman-results.json
+
+# Node & caching
+node_modules/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

@@ -1,4 +1,3 @@
-```yaml
 name: SMS Gateway Health Check
 
 on:
@@ -53,4 +52,3 @@ jobs:
           curl -X POST ${{ secrets.SLACK_WEBHOOK }} \
             -H 'Content-Type: application/json' \
             -d '{"text": "هشدار: وب‌سرویس پرشیا فاوا در بررسی روزانه با مشکل مواجه شد."}'
-```

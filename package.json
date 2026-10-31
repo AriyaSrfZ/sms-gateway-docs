@@ -6,6 +6,7 @@
     "test:yaml": "python3 -c \"import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('.github/workflows/*.yml')]\"",
     "test:openapi": "npx --yes @stoplight/spectral-cli lint openapi.yaml",
     "test:floorplan": "node floorplan/query.mjs overview > /dev/null",
-    "test": "npm run test:yaml && npm run test:openapi && npm run test:floorplan"
+    "test:html": "python3 scripts/lint-html.py",
+    "test": "npm run test:yaml && npm run test:openapi && npm run test:floorplan && npm run test:html"
   }
 }

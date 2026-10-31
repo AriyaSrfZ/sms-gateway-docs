@@ -36,7 +36,14 @@ jobs:
           EOF
 
       - name: اجرای collection (فقط health check requests)
+        env:
+          SMS_API_KEY: ${{ secrets.SMS_API_KEY }}
         run: |
+          if [ -z "$SMS_API_KEY" ]; then
+            echo "::warning::SMS_API_KEY secret is not configured in this environment. Skipping live request."
+            echo '{"status": "skipped", "reason": "SMS_API_KEY secret not configured"}' > newman-results.json
+            exit 0
+          fi
           newman run docs/PersiaFava_SMS_Gateway.postman_collection.json \
             --environment postman-env.json \
             --folder "اطلاعات کاربر (user_info)" \

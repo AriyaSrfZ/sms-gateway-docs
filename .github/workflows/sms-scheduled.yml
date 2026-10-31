@@ -27,7 +27,7 @@ jobs:
           echo "ESB OK. Balance: $CASH ریال"
 
           # هشدار موجودی کم
-          if python3 -c "import sys; exit(0 if $CASH > 10000000 else 1)"; then
+          if python3 -c "import sys; val = float(str('$CASH').replace(',', '').strip() or 0); exit(0 if val > 10000000 else 1)" 2>/dev/null; then
             echo "Balance OK"
           else
             echo "::warning::موجودی حساب کم است: $CASH ریال"
@@ -47,8 +47,14 @@ jobs:
           echo "REST OK"
 
       - name: ارسال نتیجه به Slack (اختیاری)
-        if: failure() && secrets.SLACK_WEBHOOK != ''
+        if: failure()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         run: |
-          curl -X POST ${{ secrets.SLACK_WEBHOOK }} \
-            -H 'Content-Type: application/json' \
-            -d '{"text": "هشدار: وب‌سرویس پرشیا فاوا در بررسی روزانه با مشکل مواجه شد."}'
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST "$SLACK_WEBHOOK" \
+              -H 'Content-Type: application/json' \
+              -d '{"text": "هشدار: وب‌سرویس پرشیا فاوا در بررسی روزانه با مشکل مواجه شد."}'
+          else
+            echo "Slack webhook not configured; skipping notification."
+          fi

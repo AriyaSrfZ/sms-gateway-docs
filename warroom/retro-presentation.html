@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>رترو راهبردی و بازتنظیم ذهنیت فروش B2B — پرشیا فاوا (فِرِستا)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/Vazirmatn-FD-font-face.css" rel="stylesheet" type="text/css" />
+  <style>
+    :root {
+      --canvas: #1A211E;
+      --surface: #222B27;
+      --surface-elevated: #2A3631;
+      --surface-hover: #34433D;
+      --border: #3D4E47;
+      --border-subtle: #2D3A34;
+      --text-primary: #F2EFE9;
+      --text-secondary: #B1BCB6;
+      --accent-emerald: #527C78;
+      --accent-mint: #8FB4AA;
+      --accent-ochre: #B39A77;
+      --marker-pink: #F43F5E;
+      --marker-pink-bg: rgba(244, 63, 94, 0.12);
+      --marker-orange: #F97316;
+      --marker-orange-bg: rgba(249, 115, 22, 0.12);
+    }
+    body {
+      font-family: 'Vazirmatn FD', 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--canvas);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(143, 180, 170, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+    }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    .font-handwriting { font-family: 'Caveat', 'Vazirmatn FD', cursive; }
+    
+    /* Marker scribble styles */
+    .marker-note-pink {
+      background: var(--marker-pink-bg);
+      border-right: 4px solid var(--marker-pink);
+      border-radius: 12px;
+      position: relative;
+    }
+    .marker-note-orange {
+      background: var(--marker-orange-bg);
+      border-right: 4px solid var(--marker-orange);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scribble-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .hand-tilted-left {
+      transform: rotate(-1.5deg);
+    }
+    .hand-tilted-right {
+      transform: rotate(1.2deg);
+    }
+    .slide-stage {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Hide annotations when class disabled */
+    body.hide-annotations .annotation-layer {
+      display: none !important;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #1A211E; }
+    ::-webkit-scrollbar-thumb { background: #34433D; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #527C78; }
+  </style>
+</head>
+<body class="min-h-screen py-4 sm:py-6 text-slate-100 selection:bg-rose-500/30">
+
+  <!-- Top Global Sticky Nav -->
+  <header class="max-w-[1600px] mx-auto px-4 sm:px-6 mb-6 sticky top-3 z-50">
+    <div class="bg-[#222B27]/95 backdrop-blur-md border border-[#3D4E47] rounded-2xl p-4 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-rose-950/40">
+          🎯
+        </div>
+        <div>
+          <div class="flex items-center gap-2 text-xs text-[#8FB4AA] font-mono">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            <span>STRATEGIC RETROSPECTIVE & MINDSET BLUEPRINT</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-black text-white">رترو جامع و بازتنظیم ذهنیت فروش: از تماس کور تا سیستم‌های شبکه‌ای</h1>
+        </div>
+      </div>
+
+      <!-- Controls & View Mode Switches -->
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- Mode Switcher -->
+        <div class="bg-[#1A211E] p-1 rounded-xl border border-[#3D4E47] flex items-center gap-1 text-xs">
+          <button id="btn-mode-deck" onclick="switchViewMode('deck')" class="px-3 py-1.5 rounded-lg bg-[#527C78] text-white font-bold transition flex items-center gap-1.5 shadow-sm">
+            <span>🖥️ اسلاید پرزنتیشن</span>
+          </button>
+          <button id="btn-mode-dashboard" onclick="switchViewMode('dashboard')" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-300 font-medium transition flex items-center gap-1.5">
+            <span>📑 داشبورد پیوسته</span>
+          </button>
+        </div>
+
+        <!-- Annotation Overlay Toggle -->
+        <button id="toggle-annotations-btn" onclick="toggleAnnotations()" class="px-3.5 py-1.5 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+          <span id="annotation-btn-text">یادداشت‌های خودمانی مارکر: فعال</span>
+        </button>
+
+        <!-- Navigation back to Warroom -->
+        <a href="/index.html" class="px-3.5 py-1.5 bg-[#2A3631] hover:bg-[#34433D] text-[#8FB4AA] hover:text-white border border-[#3D4E47] rounded-xl text-xs font-semibold transition flex items-center gap-1">
+          <span>← اتاق جنگ</span>
+        </a>
+        <a href="/c-levels.html" class="px-3 py-1.5 bg-[#2A3631] hover:bg-[#34433D] text-slate-300 hover:text-white border border-[#3D4E47] rounded-xl text-xs font-medium transition">
+          <span>👥 ماتریکس C-Level</span>
+        </a>
+        <a href="/list2.html" class="px-3 py-1.5 bg-[#2A3631] hover:bg-[#34433D] text-cyan-300 hover:text-white border border-cyan-500/30 rounded-xl text-xs font-medium transition">
+          <span>⚡ فاز ۲</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN CONTAINER (PRESENTATION DECK & DASHBOARD) -->
+  <!-- ========================================== -->
+  <main class="max-w-[1600px] mx-auto px-4 sm:px-6 space-y-8">
+
+    <!-- Deck Mode Controller (Visible only in deck mode) -->
+    <div id="deck-controller" class="bg-[#222B27] border border-[#3D4E47] rounded-2xl p-4 shadow-xl flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-slate-400">فصل ارائه:</span>
+        <span id="current-slide-title" class="text-xs font-bold text-[#8FB4AA]">۱. کالبدشکافی بدون تعارف ۴ اقدام گذشته</span>
+      </div>
+
+      <!-- Slide Nav Dots & Buttons -->
+      <div class="flex items-center gap-3">
+        <button onclick="prevSlide()" class="p-2 rounded-lg bg-[#2A3631] hover:bg-[#34433D] text-white transition text-xs font-bold border border-[#3D4E47] disabled:opacity-40" id="btn-prev-slide">
+          <span>قبلی (←)</span>
+        </button>
+
+        <div class="flex items-center gap-1.5" id="slide-dots-container">
+          <!-- Populated by JS -->
+        </div>
+
+        <button onclick="nextSlide()" class="p-2 rounded-lg bg-[#527C78] hover:bg-[#436763] text-white transition text-xs font-bold disabled:opacity-40" id="btn-next-slide">
+          <span>بعدی (→)</span>
+        </button>
+      </div>
+
+      <div class="hidden sm:flex items-center gap-2 text-[11px] text-slate-400 font-mono">
+        <span>اسلاید</span>
+        <span id="slide-number-indicator" class="font-bold text-white">۱ / ۷</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: RETROSPECTIVE (4 ACTS OF MISTAKES) -->
+    <!-- ========================================== -->
+    <section id="slide-1" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Watermark Background -->
+      <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-rose-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-rose-400 mb-2">
+            <span class="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/30 font-bold">ACT 01 &bull; HONEST RETRO</span>
+            <span>بخش اول: بازبینی بی‌پروای مسیر طی‌شده</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">کالبدشکافی شکست‌ها: چرا تلاش‌های قبلی به نتیجه نرسید؟</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+            ما در جلسات و پیگیری‌های گذشته زحمت کشیدیم، اما چون جنس کار «توسعه کسب‌وکار (BizDev)» با «بازاریابی انبوه (Marketing)» اشتباه گرفته شد، انرژی تیم در مسیرهای مسدود تخلیه گردید. بیایید بدون تعارف ببینیم کجاها چرخ را برعکس چرخاندیم:
+          </p>
+        </div>
+        <div class="annotation-layer marker-note-pink p-3 hand-tilted-right max-w-sm shrink-0">
+          <div class="text-[11px] text-rose-300 font-bold flex items-center gap-1.5">
+            <span>🖍️ نکته مارکر (هدف این رترو):</span>
+          </div>
+          <p class="text-[11px] text-rose-200 mt-1 leading-snug">
+            این نقد برای مقصر دانستن کسی نیست؛ برای این است که متوجه شویم چرا فرمول قبلی اصطکاک ۱۰۰٪ داشت و چرا متدولوژی جدید اصطکاک را صفر می‌کند.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Acts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Act 1 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-slate-500 transition">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 font-mono font-black flex items-center justify-center text-sm">۱</span>
+              <h3 class="font-bold text-base text-white">ارسال نامه‌های فیزیکی به دبیرخانه‌ها</h3>
+            </div>
+            <span class="scribble-badge bg-rose-500/20 text-rose-300 border border-rose-500/40">بازخورد: صفر مطلق</span>
+          </div>
+
+          <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <p><strong class="text-slate-100">چی کار کردیم؟</strong> برای ۱۰ شرکت فاز اول (طلاین، ترابرنت، زرپی، اوبار و...) نامه‌های رسمی کاغذی با مهر و امضا زدیم و فرستادیم به نشانی دفاتر و دبیرخانه‌ها.</p>
+            <p><strong class="text-slate-100">نتیجه چه شد؟</strong> هیچ تماسی گرفته نشد، هیچ جلسه‌ای ست نشد و نامه‌ها در دبیرخانه‌ها بایگانی یا دور ریخته شد.</p>
+          </div>
+
+          <!-- Annotation Note -->
+          <div class="annotation-layer marker-note-pink p-3.5 hand-tilted-left">
+            <div class="text-[11px] font-bold text-rose-300 flex items-center gap-1.5">
+              <span>⚠️ خطای بنیادین: توهم مناقصه دولتی!</span>
+            </div>
+            <p class="text-[11px] text-rose-100 mt-1 leading-normal">
+              استارتاپ‌ها، صرافی‌های رمزارز و پلتفرم‌های مدرن هیچ‌وقت نامه کاغذی یک شرکت غریبه را برای مدیرعامل نمی‌برند! منشی نامه را بایگانی می‌کند. نامه رسمی سربرگ‌دار فقط مقاومت دفاعی ایجاد می‌کند و کار را شبیه فروش فرمالیته دولتی جلوه می‌دهد.
+            </p>
+          </div>
+        </div>
+
+        <!-- Act 2 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-slate-500 transition">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-orange-500/20 text-orange-400 font-mono font-black flex items-center justify-center text-sm">۲</span>
+              <h3 class="font-bold text-base text-white">سندرم قاشق‌به‌دهن و سلب مسئولیت تیم</h3>
+            </div>
+            <span class="scribble-badge bg-orange-500/20 text-orange-300 border border-orange-500/40">انفعال و سلب ابتکار</span>
+          </div>
+
+          <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <p><strong class="text-slate-100">چی کار کردیم؟</strong> آریا (صراف‌زاده) تمام ابزارها، اسکرپرها، دیتابیس‌ها، تلفن‌ها، شناسه‌های ثبتی و داشبوردهای وب را صفر تا صد ایجاد و آماده کرد.</p>
+            <p><strong class="text-slate-100">نتیجه چه شد؟</strong> چون همه چیز آماده تحویل شد، تیم به جای شروع نتورکینگ و کشف راه‌های نفوذ، منتظر ماند تا آریا مرحله بعد را دیکته کند («لیست ۲ کو؟»، «چرا لینک کمه؟»).</p>
+          </div>
+
+          <!-- Annotation Note -->
+          <div class="annotation-layer marker-note-orange p-3.5 hand-tilted-right">
+            <div class="text-[11px] font-bold text-orange-300 flex items-center gap-1.5">
+              <span>⚠️ خطای بنیادین: دیتابیس به خودی خود نمی‌فروشد!</span>
+            </div>
+            <p class="text-[11px] text-orange-100 mt-1 leading-normal">
+              آماده کردن ۱۰۰٪ داده‌ها باعث فلج شدن ابتکار عمل شد. تیم فکر کرد کار اصلی «تولید لیست» است، در حالی که کار اصلی «کشف اتصال انسانی و باز کردن در» است. دیتابیس بدون پیگیری فعال انسانی فقط مشتی عدد روی هارددیسک است.
+            </p>
+          </div>
+        </div>
+
+        <!-- Act 3 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-slate-500 transition">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 font-mono font-black flex items-center justify-center text-sm">۳</span>
+              <h3 class="font-bold text-base text-white">توهم کار مفید با اصلاح لینک‌ها و اکسل</h3>
+            </div>
+            <span class="scribble-badge bg-rose-500/20 text-rose-300 border border-rose-500/40">مشغله بدون خروجی</span>
+          </div>
+
+          <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <p><strong class="text-slate-100">چی کار کردیم؟</strong> فائزه لینک‌ها را ممیزی کرد، یادداشت گذاشت، مدیرعامل چند پروفایل لینکدین اضافه کرد و چندین ساعت صرف غلط‌گیری صفحات شد.</p>
+            <p><strong class="text-slate-100">نتیجه چه شد؟</strong> اکسل تمیز شد، اما پایپ‌لاین فروش حتی ۱ سانتی‌متر جلو نرفت چون مکالمه‌ای با هیچ مشتری رخ نداد.</p>
+          </div>
+
+          <!-- Annotation Note -->
+          <div class="annotation-layer marker-note-pink p-3.5 hand-tilted-left">
+            <div class="text-[11px] font-bold text-rose-300 flex items-center gap-1.5">
+              <span>⚠️ خطای بنیادین: اشتباه گرفتن بهداشت داده با پیشرفت فروش!</span>
+            </div>
+            <p class="text-[11px] text-rose-100 mt-1 leading-normal">
+              اصلاح اکسل و کلیک روی لینک‌ها یک فعالیت امن اداری است که به آدم حس کاذب کار کردن می‌دهد؛ اما تا زمانی که پیامی شخصی‌سازی‌شده به یک مهندس نرم‌افزار یا مدیر عملیات ارسال نشود، هیچ فروشی اتفاق نمی‌افتد.
+            </p>
+          </div>
+        </div>
+
+        <!-- Act 4 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-slate-500 transition">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-orange-500/20 text-orange-400 font-mono font-black flex items-center justify-center text-sm">۴</span>
+              <h3 class="font-bold text-base text-white">عقب‌گرد به قیف مارکتینگ و پیام کور</h3>
+            </div>
+            <span class="scribble-badge bg-orange-500/20 text-orange-300 border border-orange-500/40">فاجعه هدف‌گیری غلط</span>
+          </div>
+
+          <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <p><strong class="text-slate-100">چی کار کردیم؟</strong> طبق تحلیل جدید، لیست پر شد از مدیران مارکتینگ (CMO)، مدیران برند، مدیران محتوا و روابط عمومی (PR) با هدف ارسال پیام تعرفه پیامک.</p>
+            <p><strong class="text-slate-100">نتیجه چه شد؟</strong> اشتباه گرفتن پیامک تراکنشی (OTP) با پیامک تبلیغاتی! مارکتینگ تصمیمی روی زیرساخت فنی نمی‌گیرد.</p>
+          </div>
+
+          <!-- Annotation Note -->
+          <div class="annotation-layer marker-note-orange p-3.5 hand-tilted-right">
+            <div class="text-[11px] font-bold text-orange-300 flex items-center gap-1.5">
+              <span>⚠️ خطای بنیادین: مارکتینگ درد فنی را احساس نمی‌کند!</span>
+            </div>
+            <p class="text-[11px] text-orange-100 mt-1 leading-normal">
+              مدیر مارکتینگ به دنبال کمپین تخفیف بلک‌فرایدی است. وقتی ساعت ۲ نصف شب در اوج نوسان قیمت طلا یا اعلام بار، پیامک لاگین دوعاملی قطع می‌شود، این مدیر فنی، بک‌اند کار و تیم امور مشتریان هستند که فحش می‌خورند! چرا سراغ کسی رفتیم که دردی ندارد؟
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: COLD MARKETING VS B2B NETWORK BIZDEV -->
+    <!-- ========================================== -->
+    <section id="slide-2" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-cyan-400 mb-2">
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-500/30 font-bold">ACT 02 &bull; PARADIGM SHIFT</span>
+            <span>بخش دوم: تغییر بنیادین مدل ذهنی</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">تماس سرد تبلیغاتی در برابر سیستم‌های شبکه‌ای توسعه کسب‌وکار</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+            بزرگ‌ترین اشتباه این بود که «توسعه کسب‌وکار (BizDev)» با «بازاریابی سنتی و فروش تلفنی» اشتباه گرفته شد. این جدول تفاوت این دو دنیا را روی میز می‌گذارد:
+          </p>
+        </div>
+      </div>
+
+      <!-- Comparison Matrix -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- Column 1: Cold Contacting (The WRONG Way) -->
+        <div class="bg-[#1D1719] border-2 border-rose-500/40 rounded-2xl p-6 space-y-6 shadow-xl relative">
+          <div class="flex items-center justify-between border-b border-rose-500/30 pb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 font-black flex items-center justify-center text-lg">✕</span>
+              <div>
+                <h3 class="font-black text-base text-rose-200">روش غلط: بازاریابی سرد و پیام کور (Cold Blast)</h3>
+                <p class="text-[11px] text-rose-300/80">ذهنیتی که تیم ناخودآگاه در آن گرفتار شد</p>
+              </div>
+            </div>
+            <span class="scribble-badge bg-rose-500/20 text-rose-300 border border-rose-500/40">نرخ تبدیل: زیر ۰٫۱٪</span>
+          </div>
+
+          <ul class="text-xs text-slate-300 space-y-3.5">
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">ورود از در اصلی:</strong> ارسال نامه به دبیرخانه، زنگ زدن به منشی شرکت یا پیام جنریک به مدیرعامل. (نتیجه: بلاک و بایگانی).</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">مخاطب اشتباه:</strong> مدیر روابط عمومی، مدیر برند یا CMO که هیچ کدی نمی‌نویسد و مسئولیتی روی سرورها ندارد.</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">پیشنهاد پر اصطکاک:</strong> «بیایید قرارداد ببندید، سرویس فعلی را قطع کنید و از ما خط بخرید». (هیچ مدیری برای صرفه‌جویی چند تومانی ریسک قطعی نمی‌پذیرد).</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">زمین بازی باخت:</strong> رقابت بر سر قیمت پیامک با غول‌های تجمیع‌کننده (کاوه‌نگار، مدیانا) که تخفیف منفی می‌دهند.</div>
+            </li>
+          </ul>
+
+          <div class="annotation-layer marker-note-pink p-3.5 hand-tilted-left">
+            <div class="text-[11px] font-bold text-rose-300">🚨 نتیجه این روش:</div>
+            <p class="text-[11px] text-rose-100 mt-1">
+              خستگی مفرط تیم، ناامیدی از تماس‌ها، توهم این که «بازار خراب است» و در نهایت عدم جذب حتی یک مشترک جدی.
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 2: Network Systems BizDev (The RIGHT Way) -->
+        <div class="bg-[#14231E] border-2 border-emerald-500/50 rounded-2xl p-6 space-y-6 shadow-xl relative">
+          <div class="flex items-center justify-between border-b border-emerald-500/30 pb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 font-black flex items-center justify-center text-lg">✓</span>
+              <div>
+                <h3 class="font-black text-base text-emerald-200">روش صحیح: توسعه سیستم‌های شبکه‌ای (Network BizDev)</h3>
+                <p class="text-[11px] text-emerald-300/80">راهبردی که پرشیا فاوا برای آن ساخته شده است</p>
+              </div>
+            </div>
+            <span class="scribble-badge bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">نرخ تبدیل: بالای ۲۵٪</span>
+          </div>
+
+          <ul class="text-xs text-slate-300 space-y-3.5">
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">نقشه‌برداری گراف سازمانی:</strong> شناسایی مسیرهای کم‌مقاومت انسانی (دوستان مشترک، دانشگاه شریف/تهران، همکاران سابق).</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">اسب تروجان لایه ۲:</strong> ورود مستقیم از طریق مهندس ارشد بک‌اند، لید زیرساخت و مدیر پشتیبانی که درد تأخیر پیامک را با پوست و گوشت حس می‌کنند.</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">پیشنهاد بدون ریسک (Hot Failover):</strong> «دست به سرویس فعلی‌تان نزنید! ما صرفاً خط رزرو رایگان شماییم برای ساعات قطعی اپراتورها با ۵۰k پیامک تست هدیه».</div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 font-bold mt-0.5">●</span>
+              <div><strong class="text-white">زمین بازی برد:</strong> تحویل زیر ۲ ثانیه، وب‌هوک گزارش تا سطح گوشی، اتصال مستقیم SMPP به زیرساخت مخابرات و تسویه پس‌پرداخت ۳۰ روزه.</div>
+            </li>
+          </ul>
+
+          <div class="annotation-layer marker-note-orange p-3.5 hand-tilted-right">
+            <div class="text-[11px] font-bold text-orange-300">💡 معجزه این روش:</div>
+            <p class="text-[11px] text-orange-100 mt-1">
+              مهندس فنی شرکت هدف، خودش تبدیل به حامی درون‌سازمانی (Internal Champion) ما می‌شود و به مدیرعامل می‌گوید: «این تست عالیه، بذارید روت دوم ستش کنم!».
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: THE 5 QUALIFICATION PILLARS -->
+    <!-- ========================================== -->
+    <section id="slide-3" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6">
+        <div class="flex items-center gap-2 text-xs font-mono text-amber-400 mb-2">
+          <span class="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/30 font-bold">ACT 03 &bull; FIRST PRINCIPLES</span>
+          <span>بخش سوم: بازخوانی اصول بنیادین</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">چرا ۵ قانون طلایی فیلترینگ حساب‌ها را تدوین کردیم؟</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+          هیچ شرکتی نباید شانسی یا صرفاً بر اساس مشهور بودن انتخاب شود. ما ۵ فیلتر را برای این ساختیم که انرژی و زمان محدود تیم فقط روی اهدافی متمرکز شود که احتمال بستن قرارداد در آن‌ها حداکثر است:
+        </p>
+      </div>
+
+      <!-- 5 Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Pillar 1 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative hover:border-amber-400/50 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 font-bold flex items-center justify-center text-lg border border-amber-500/30">
+            🐎
+          </div>
+          <h3 class="font-bold text-sm text-white">۱. اسب تروجان فنی (شکایات تاخیر OTP)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            احراز حداقل ۲ مورد شکایت عمومی کاربران در توییتر/ایکس، کافه‌بازار یا مایکت از نیامدن کد ورود در ساعات پیک.
+          </p>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-200 hand-tilted-left">
+            <strong>چرا این قانون؟</strong> اگر پیامک شرکتی عالی کار می‌کند، چرا باید مدیرش به حرف ما گوش دهد؟ ما فقط سراغ کسانی می‌رویم که همین الان بابت قطعی فحش می‌خورند!
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative hover:border-amber-400/50 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 font-bold flex items-center justify-center text-lg border border-amber-500/30">
+            ⚡
+          </div>
+          <h3 class="font-bold text-sm text-white">۲. گردش مالی بالا و رشد تهاجمی</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            تمرکز بر پلتفرم‌های معاملات آنلاین طلا، سامانه‌های اعلام بار و لجستیک جاده‌ای و لندتک‌های اقساطی چابک.
+          </p>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200 hand-tilted-right">
+            <strong>چرا این قانون؟</strong> در بازار طلا یا حمل بار سنگین، ۱۰ ثانیه تأخیر پیامک مساوی است با از دست رفتن میلیون‌ها تومان سود معامله یا معلق ماندن کامیون در جاده!
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative hover:border-amber-400/50 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 font-bold flex items-center justify-center text-lg border border-amber-500/30">
+            📊
+          </div>
+          <h3 class="font-bold text-sm text-white">۳. شدت پیامک تراکنشی (نه تبلیغاتی)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            بیش از ۸۵٪ ترافیک شرکت باید پیامک‌های لاگین، فاکتور، بارنامه و واریز/برداشت باشد نه پیامک فله‌ای بلک‌فرایدی.
+          </p>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-200 hand-tilted-left">
+            <strong>چرا این قانون؟</strong> ارزش حاشیه سود و حساسیت پیامک OTP ده برابر پیامک تبلیغاتی است. برای پیامک تبلیغاتی کسی سراغ پرشیا فاوا نمی‌آید؛ پیامک حیاتی مزیت ماست.
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative hover:border-amber-400/50 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 font-bold flex items-center justify-center text-lg border border-amber-500/30">
+            🛡️
+          </div>
+          <h3 class="font-bold text-sm text-white">۴. بکر بودن و شاخص نفوذ پایین رقیب (Low IEI)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            پرهیز از برندهای اصطلاحاً Vanity (دیجی‌کالا، اسنپ، میلی‌گلد) که قراردادهای سفت و تخفیف منفی با رقبای سنتی دارند.
+          </p>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200 hand-tilted-right">
+            <strong>چرا این قانون؟</strong> شرکت‌های غول‌پیکر بروکراسی وحشتناک دارند و تغییر پرووایدر ماه‌ها طول می‌کشد. استارتاپ‌های چابک V2 ظرف یک هفته تست و متصل می‌شوند!
+          </div>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative hover:border-amber-400/50 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 font-bold flex items-center justify-center text-lg border border-amber-500/30">
+            🤝
+          </div>
+          <h3 class="font-bold text-sm text-white">۵. ضریب دسترسی سازمانی (Accessibility)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            امکان شناسایی و ارتباط با تصمیم‌گیرنده C-Level و حداقل ۲ رابط فنی معتبر با صفحه فعال لینکدین.
+          </p>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-200 hand-tilted-left">
+            <strong>چرا این قانون؟</strong> شرکتی که اعضای تیمش هیچ ردپایی در لینکدین ندارند یا ساختار تاریک دارند، دیوار بتنی است و وقت تلف کردن محض.
+          </div>
+        </div>
+
+        <!-- Standing Bans Summary -->
+        <div class="bg-[#261B1E] border border-rose-500/40 rounded-2xl p-5 space-y-3 relative">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 font-bold flex items-center justify-center text-lg border border-rose-500/40">
+            ⛔
+          </div>
+          <h3 class="font-bold text-sm text-rose-200">تحریم‌ها و فایروال‌های حاکمیتی</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            ورود ۴ شرکت اکیداً ممنوع: تیپاکس (مشتری رسمی)، میلی‌گلد (دستور حقوقی)، الوپیک (پارک علم و فناوری)، جاباما.
+          </p>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200 hand-tilted-right">
+            <strong>فایروال تلیر:</strong> تفکیک ۱۰۰٪ زیرساخت فنی تلیر از پایپ‌لاین فروش پرشیا فاوا. کانال عملیات فقط PFG B2B Command Hall است.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: THE LAYER-2 TROJAN HORSE PLAYBOOK -->
+    <!-- ========================================== -->
+    <section id="slide-4" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 font-bold">ACT 04 &bull; STRATEGY ENGINE</span>
+            <span>بخش چهارم: مهندسی نفوذ نرم از لایه دوم</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">پلی‌بوک اسب تروجان: چگونه لایه دوم در سازمان را باز می‌کند؟</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+            وقتی به مدیرعامل ایمیل می‌زنید، او به چشم یک ویزیتور سمج به شما نگاه می‌کند. اما وقتی اول مشکل فنی لید زیرساخت را حل می‌کنید، همان لید فنی برای شما در اتاق مدیرعامل جلسه می‌گذارد:
+          </p>
+        </div>
+      </div>
+
+      <!-- 4-Stage Routing Flow -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative">
+          <div class="text-xs font-mono text-[#8FB4AA] font-bold">STEP 01</div>
+          <h3 class="font-bold text-sm text-white">رصد نقطه درد فنی</h3>
+          <p class="text-xs text-slate-300">پیدا کردن شکایت تاخیر OTP در توییتر یا کامنت‌های کافه‌بازار شرکت هدف.</p>
+          <div class="annotation-layer marker-note-pink p-2 text-[10.5px] text-rose-200">
+            «توییت کاربر طلاین: ۱۰ دقیقه پای درگاه منتظر کد تایید موندم طلا ریخت!»
+          </div>
+        </div>
+
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative">
+          <div class="text-xs font-mono text-[#8FB4AA] font-bold">STEP 02</div>
+          <h3 class="font-bold text-sm text-white">پیام گرم به لایه دوم در لینکدین</h3>
+          <p class="text-xs text-slate-300">ارسال پیام فنی و دلسوزانه به لید بک‌اند یا DevOps شرکت، نه پیشنهاد فروش!</p>
+          <div class="annotation-layer marker-note-orange p-2 text-[10.5px] text-orange-200">
+            «سلام مهندس، متوجه تاخیر OTP در نوسان ظهر شدیم. یک کلید تست ۵۰k با اتصال مستقیم مخابرات ساختیم براتون بدون تعهد.»
+          </div>
+        </div>
+
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-5 space-y-3 relative">
+          <div class="text-xs font-mono text-[#8FB4AA] font-bold">STEP 03</div>
+          <h3 class="font-bold text-sm text-white">راه‌اندازی ۱۰ دقیقه‌ای Hot Failover</h3>
+          <p class="text-xs text-slate-300">ارائه مستندات ۲ صفحه‌ای REST/Python/PHP و تست سرعت تحویل زیر ۲ ثانیه.</p>
+          <div class="annotation-layer marker-note-pink p-2 text-[10.5px] text-rose-200">
+            مهندس تست می‌کند، وب‌هوک گوشی فعال می‌شود و می‌بیند واقعاً تا گوشی کاربر زیر ۲ ثانیه می‌رسد!
+          </div>
+        </div>
+
+        <div class="bg-[#1A211E] border border-emerald-500/50 rounded-2xl p-5 space-y-3 relative bg-emerald-950/20">
+          <div class="text-xs font-mono text-emerald-400 font-bold">STEP 04</div>
+          <h3 class="font-bold text-sm text-emerald-300">ارجاع به C-Suite توسط خود شرکت</h3>
+          <p class="text-xs text-slate-300">لید فنی به CTO و مدیرعامل می‌گوید: این روت دوم عالیه، بذارید قرارداد سالانه ببندیم.</p>
+          <div class="annotation-layer marker-note-orange p-2 text-[10.5px] text-orange-200">
+            اینجا خانم مهندس شهروزی و خانم موسی‌پور وارد جلسه می‌شوند و قرارداد اصلی منعقد می‌گردد.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trojan Offer 4 Guarantees -->
+      <div class="bg-[#17221E] border border-emerald-500/30 rounded-2xl p-6 space-y-4">
+        <h4 class="font-bold text-sm text-emerald-300 flex items-center gap-2">
+          <span>🛡️ ۴ رکن آفر ملایم بدون اصطکاک (The Zero Friction Offer):</span>
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs text-slate-300">
+          <div class="p-3 rounded-xl bg-black/20 border border-white/5 space-y-1">
+            <div class="font-bold text-white">۱. بدون لغو قرارداد فعلی</div>
+            <p class="text-[11px] text-slate-400">به مشتری نمی‌گوییم پرووایدر فعلی‌اش را اخراج کند؛ ما صرفاً تایر زاپاس اضطراری هستیم.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-black/20 border border-white/5 space-y-1">
+            <div class="font-bold text-white">۲. پایلوت ۵۰k پیامک رایگان</div>
+            <p class="text-[11px] text-slate-400">تیم فنی بدون نیاز به گرفتن چک یا امضای مدیر مالی می‌تواند همین امروز خط را تست کند.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-black/20 border border-white/5 space-y-1">
+            <div class="font-bold text-white">۳. مستندات ۲ صفحه‌ای چابک</div>
+            <p class="text-[11px] text-slate-400">نمونه کدهای آماده پایتون، نود و PHP بدون تشریفات و اصطلاحات سنگین تلکام.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-black/20 border border-white/5 space-y-1">
+            <div class="font-bold text-white">۴. تسویه پس‌پرداخت ۳۰ روزه</div>
+            <p class="text-[11px] text-slate-400">پرداخت پس از مصرف واقعی بر اساس فاکتور ماهانه بدون مسدود شدن نقدینگی استارتاپ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 5: CASE STUDIES (TALINE, TARABARNET, ECOGOLD) -->
+    <!-- ========================================== -->
+    <section id="slide-5" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6">
+        <div class="flex items-center gap-2 text-xs font-mono text-purple-400 mb-2">
+          <span class="px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30 font-bold">ACT 05 &bull; CASE STUDIES</span>
+          <span>بخش پنجم: بررسی موردی ۳ حساب شاخص</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">تطبیق روی زمین: چطور برای هر شرکت اختصاصی نفوذ کنیم؟</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+          بیایید ۳ شرکت طلاین، ترابرنت و اکوگلد را مقایسه کنیم و ببینیم چطور مسیر اشتباه قبلی را به مسیر درست نتورکینگ تبدیل می‌کنیم:
+        </p>
+      </div>
+
+      <!-- Account Tabs -->
+      <div class="flex items-center gap-2 border-b border-[#3D4E47] pb-3">
+        <button onclick="switchCaseTab('taline')" id="tab-btn-taline" class="px-4 py-2 rounded-xl bg-[#527C78] text-white font-bold text-xs transition">
+          <span>۱. طلاین (Taline — طلای آبشده)</span>
+        </button>
+        <button onclick="switchCaseTab('tarabar')" id="tab-btn-tarabar" class="px-4 py-2 rounded-xl bg-[#2A3631] text-slate-300 font-semibold text-xs hover:bg-[#34433D] transition">
+          <span>۲. ترابرنت (Tarabarnet — باربری سنگین)</span>
+        </button>
+        <button onclick="switchCaseTab('ecogold')" id="tab-btn-ecogold" class="px-4 py-2 rounded-xl bg-[#2A3631] text-cyan-300 font-semibold text-xs hover:bg-[#34433D] transition">
+          <span>۳. اکوگلد (EcoGold — فاز ۲ بکر)</span>
+        </button>
+      </div>
+
+      <!-- Tab Content: Taline -->
+      <div id="case-tab-taline" class="case-tab-content space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-[#1F1719] border border-rose-500/30 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-rose-300 flex items-center gap-2">
+              <span class="text-rose-400">✕</span> <span>مسیر اشتباه گذشته در طلاین:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• فرستادن نامه سربرگ‌دار رسمی به دفتر یزد و پارک علم و فناوری اقبال. (نتیجه: بی‌پاسخ در بایگانی).</li>
+              <li>• پیام در لینکدین به آرین یعقوبی (CMO طلاین) با پیشنهاد تعرفه پیامک. (نتیجه: عدم تمایل به تغییر زیرساخت فنی).</li>
+            </ul>
+            <div class="annotation-layer marker-note-pink p-3 text-[11px] text-rose-200 hand-tilted-left">
+              «آرین یعقوبی نگران کمپین تبلیغاتی یلداست؛ اگر سیستم فنی طلاین بخوابد هم دستش زیر ساطور نیست!»
+            </div>
+          </div>
+
+          <div class="bg-[#14231E] border border-emerald-500/30 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-emerald-300 flex items-center gap-2">
+              <span class="text-emerald-400">✓</span> <span>مسیر صحیح شبکه و لایه ۲ در طلاین:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• ارتباط با <strong>امیرحسین شیخ‌الاسلامی</strong> (مهندس ارشد نرم‌افزار / سیستم پرداخت و لجر طلاین).</li>
+              <li>• نقطه درد: نوسان قیمت طلا و تاخیر OTP در ساعات ظهر که باعث فریز شدن موجودی کیف‌پول کاربران می‌شود.</li>
+              <li>• پیشنهاد هوک: کلید تستی ۵۰k هدیه با اتصال SMPP مستقیم برای ساعات نوسان بدون نیاز به تغییر روت فعلی.</li>
+            </ul>
+            <div class="annotation-layer marker-note-orange p-3 text-[11px] text-orange-200 hand-tilted-right">
+              «امیرحسین وقتی ببیند تراکنش لجر در نوسان لحظه‌ای مسدود نمی‌شود، خودش روت رزرو را فعال می‌کند.»
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Tarabarnet -->
+      <div id="case-tab-tarabar" class="case-tab-content space-y-6 hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-[#1F1719] border border-rose-500/30 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-rose-300 flex items-center gap-2">
+              <span class="text-rose-400">✕</span> <span>مسیر اشتباه گذشته در ترابرنت:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• ارسال نامه رسمی به هلدینگ حصین (شرکت مادر). (نتیجه: گم شدن در بروکراسی عریض و طویل هلدینگ).</li>
+              <li>• تلاش برای تماس تلفنی با منشی مدیرعامل محمد صدوقی. (نتیجه: عدم وصل تماس).</li>
+            </ul>
+            <div class="annotation-layer marker-note-pink p-3 text-[11px] text-rose-200 hand-tilted-left">
+              «در سازمان‌های بزرگ هلدینگی مثل حصین، نامه اداری از دبیرخانه تکان نمی‌خورد!»
+            </div>
+          </div>
+
+          <div class="bg-[#14231E] border border-emerald-500/30 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-emerald-300 flex items-center gap-2">
+              <span class="text-emerald-400">✓</span> <span>مسیر صحیح شبکه و لایه ۲ در ترابرنت:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• ارتباط با <strong>ابوذر نوری</strong> (قائم‌مقام مدیرعامل و COO / CTO سابق طاقچه) یا <strong>حسین فراهانی</strong> (سرپرست تیم بک‌اند اعلام بار).</li>
+              <li>• نقطه درد: تاخیر پیامک اعلام بار به رانندگان کامیون در پایانه‌ها که باعث خشم رانندگان و تماس با پشتیبانی می‌شود.</li>
+              <li>• پیشنهاد هوک: وب‌هوک وضعیت تحویل واقعی تا سطح گوشی راننده بدون نیاز به پولینگ مکرر سرور.</li>
+            </ul>
+            <div class="annotation-layer marker-note-orange p-3 text-[11px] text-orange-200 hand-tilted-right">
+              «ابوذر نوری یک مدیر با دید فنی عمیق است؛ زبان صحبت با او SLA پایداری و رفع شکایت راننده است.»
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: EcoGold -->
+      <div id="case-tab-ecogold" class="case-tab-content space-y-6 hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-[#1F1719] border border-rose-500/30 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-rose-300 flex items-center gap-2">
+              <span class="text-rose-400">✕</span> <span>اگر با روش غلط وارد اکوگلد شویم:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• تماس با شماره ۰۲۱-۸۲۸۰۰۸۶۰ دفتر اختیاریه و صحبت با مسئول دفتر: «از پرشیا فاوا تماس می‌گیرم تعرفه پیامک داریم». (نتیجه: قطع فوری تماس).</li>
+            </ul>
+            <div class="annotation-layer marker-note-pink p-3 text-[11px] text-rose-200 hand-tilted-left">
+              «بازاریاب‌های کاوه‌نگار و فراپیامک روزی ۱۰ بار با این شماره‌ها تماس می‌گیرند؛ منشی آموزش دیده که بگوید نیاز نداریم!»
+            </div>
+          </div>
+
+          <div class="bg-[#14231E] border border-cyan-500/40 rounded-2xl p-6 space-y-4">
+            <h4 class="font-bold text-sm text-cyan-300 flex items-center gap-2">
+              <span class="text-cyan-400">✓</span> <span>مسیر چابک V2 در اکوگلد:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-2.5">
+              <li>• اکوگلد یک شرکت جوان و با شاخص نفوذ سطح ۱ (Greenfield) است؛ هنوز اسیر قرارداد انحصاری نشده است.</li>
+              <li>• ارتباط مستقیم در لینکدین با <strong>سینا صفایی</strong> (مهندس ارشد زیرساخت و پردازش تراکنش‌ها) و مدیرعامل <strong>احسان مسلمی</strong>.</li>
+              <li>• پیشنهاد هوک: خط نجات و بیمه اضطراری رایگان برای معاملات سنگین شمش و طلای آبشده.</li>
+            </ul>
+            <div class="annotation-layer marker-note-orange p-3 text-[11px] text-orange-200 hand-tilted-right">
+              «اکوگلد تشنه اعتبار و پایداری است؛ ورود با متانت و بدون ادعای توخالی، ظرف ۳ روز قرارداد می‌آورد.»
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 6: INTERACTIVE OUTREACH SIMULATOR -->
+    <!-- ========================================== -->
+    <section id="slide-6" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6">
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 font-bold">ACT 06 &bull; TEAM SIMULATOR</span>
+          <span>بخش ششم: شبیه‌ساز تعاملی سناریوهای اقدام</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">اتاق تمرین: شما در این موقعیت فرضی چه تصمیمی می‌گیرید؟</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+          برای سنجش تغییر ذهنیت تیم، یکی از گزینه‌های زیر را انتخاب کنید تا نتیجه آنی تصمیم خود را با یادداشت‌های مارکر ببینید:
+        </p>
+      </div>
+
+      <!-- Simulator Container -->
+      <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-6">
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">سناریوی ۱ از ۳</span>
+          <h3 class="font-bold text-sm text-white">می‌خواهید برای اولین بار با پلتفرم طلای «اکوگلد (EcoGold)» ارتباط بگیرید. اولین گام شما چیست؟</h3>
+        </div>
+
+        <div class="space-y-3" id="sim-options">
+          <button onclick="handleSimChoice('A')" class="w-full text-right p-4 rounded-xl bg-[#222B27] hover:bg-[#2A3631] border border-[#3D4E47] text-xs text-slate-200 transition flex items-center justify-between group">
+            <span><strong>گزینه الف:</strong> با شماره تلفن ثابت دفتر مرکزی تماس می‌گیرم و از منشی می‌خواهم مرا به مدیرعامل وصل کند تا پیامک پرشیا فاوا را پرزنت کنم.</span>
+            <span class="text-slate-500 group-hover:text-white transition">←</span>
+          </button>
+
+          <button onclick="handleSimChoice('B')" class="w-full text-right p-4 rounded-xl bg-[#222B27] hover:bg-[#2A3631] border border-[#3D4E47] text-xs text-slate-200 transition flex items-center justify-between group">
+            <span><strong>گزینه ب:</strong> در لینکدین برای مدیر مارکتینگ اکوگلد پیام می‌فرستم و جدول تعرفه پیامک را همراه با نامه رسمی ضمیمه می‌کنم.</span>
+            <span class="text-slate-500 group-hover:text-white transition">←</span>
+          </button>
+
+          <button onclick="handleSimChoice('C')" class="w-full text-right p-4 rounded-xl bg-[#222B27] hover:bg-[#2A3631] border border-emerald-500/40 text-xs text-emerald-200 transition flex items-center justify-between group bg-emerald-950/10">
+            <span><strong>گزینه ج:</strong> در لینکدین به سینا صفایی (مهندس ارشد زیرساخت اکوگلد) پیام می‌دهم و پیشنهاد ۵۰k پیامک تست رایگان و بدون تعهد جهت بیمه ساعات نوسان قیمت طلا را مطرح می‌کنم.</span>
+            <span class="text-emerald-400 group-hover:text-white transition">✓</span>
+          </button>
+        </div>
+
+        <!-- Result Box -->
+        <div id="sim-feedback-box" class="hidden p-5 rounded-xl border transition space-y-2">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 7: CONCRETE TEAM ROLES & ACTION CONTRACT -->
+    <!-- ========================================== -->
+    <section id="slide-7" class="slide-card bg-[#222B27] border border-[#3D4E47] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+      <!-- Header -->
+      <div class="border-b border-[#3D4E47] pb-6">
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 font-bold">ACT 07 &bull; ACTION CONTRACT</span>
+          <span>بخش هفتم: پایان انفعال و قرارداد مسئولیت تیم</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">پایان سندرم قاشق‌به‌دهن: هر فرد دقیقاً چه مسئولیتی دارد؟</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-4xl leading-relaxed">
+          برای این که کسی منتظر دیگری نماند و دیتابیس تبدیل به قرارداد لایو شود، این ۵ نقش شفاف از فردا صبح مبنای ارزیابی تیم است:
+        </p>
+      </div>
+
+      <!-- 5 Roles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Role 1: Shahroozi -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-emerald-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="scribble-badge bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">رهبری عالی و C-Suite</span>
+            <span class="text-xs text-slate-500 font-mono">ROLE 01</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">سرکار خانم مهندس شهروزی</h3>
+            <p class="text-xs text-[#8FB4AA]">مدیرعامل پرشیا فاوا</p>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li>• باز کردن درهای سطح عالی با مدیران عامل پس از تایید اولیه لایه فنی.</li>
+            <li>• تضمین SLA و رفع موانع حقوقی در عقد قراردادهای کلان سازمانی.</li>
+          </ul>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200">
+            «حضور در نقطه پیروزی: وقتی تیم فنی پایلوت ۵۰k را تایید کرد، مدیرعامل جلسه عقد قرارداد را هدایت می‌کند.»
+          </div>
+        </div>
+
+        <!-- Role 2: Mousipour -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-emerald-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="scribble-badge bg-[#527C78]/30 text-emerald-300 border border-[#527C78]/50">مذاکره تجاری ارشد</span>
+            <span class="text-xs text-slate-500 font-mono">ROLE 02</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">سرکار خانم موسی‌پور</h3>
+            <p class="text-xs text-[#8FB4AA]">معاونت اجرایی و عملیات (COO)</p>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li>• پیگیری شخصی و مذاکره با روسای دفاتر و معاونت‌های تجاری و عملیات.</li>
+            <li>• تنظیم تعرفه شناور و مدل‌های تسهیلات پس‌پرداخت ۳۰ روزه متناسب با هر حساب.</li>
+          </ul>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-200">
+            «خروج از کانال دبیرخانه و تمرکز بر کانتکت‌های لایه دوم و ارشد شناسایی‌شده در اتاق جنگ.»
+          </div>
+        </div>
+
+        <!-- Role 3: Khorramdel -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-emerald-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="scribble-badge bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">عملیات و هماهنگی پایلوت</span>
+            <span class="text-xs text-slate-500 font-mono">ROLE 03</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">سرکار خانم خرم‌دل</h3>
+            <p class="text-xs text-cyan-300">عملیات و تحویل پکیج‌های فنی</p>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li>• صدور فوری API Key و کردیت ۵۰,۰۰۰ پیامک تست رایگان برای مشتریان هدف.</li>
+            <li>• ارسال پکیج مستندات ۲ صفحه‌ای پایتون/PHP و پیگیری نتایج وب‌هوک دلیوری.</li>
+          </ul>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200">
+            «پایلوت بدون اصطکاک: تحویل کلید تست در کمتر از ۱۵ دقیقه به مهندس فنی شرکت هدف.»
+          </div>
+        </div>
+
+        <!-- Role 4: Faezeh -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-emerald-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="scribble-badge bg-amber-500/20 text-amber-300 border border-amber-500/40">رصد اتصالات و شبکه</span>
+            <span class="text-xs text-slate-500 font-mono">ROLE 04</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">سرکار خانم کوشکشتانی (فائزه)</h3>
+            <p class="text-xs text-amber-300">ممیزی میدانی و رصد شبکه</p>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li>• کشف اتصالات انسانی مشترک (هم‌دانشگاهی‌ها، همکاران قبلی در لینکدین).</li>
+            <li>• خروج از اصلاح صرف لینک‌ها و رصد فعال سیگنال‌های قطعی پیامک در شبکه‌های اجتماعی.</li>
+          </ul>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-200">
+            «تبدیل داده به فرصت: کشف این که لید فنی اکوگلد با چه کسانی در پرشیا فاوا دوست مشترک دارد!»
+          </div>
+        </div>
+
+        <!-- Role 5: Sarrafzadeh -->
+        <div class="bg-[#1A211E] border border-[#3D4E47] rounded-2xl p-6 space-y-4 hover:border-purple-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="scribble-badge bg-purple-500/20 text-purple-300 border border-purple-500/40">معماری سیستم و لیدجنریشن</span>
+            <span class="text-xs text-slate-500 font-mono">ROLE 05</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">جناب آقای مهندس صراف‌زاده (آریا)</h3>
+            <p class="text-xs text-purple-300">معمار توسعه محصول و اتاق جنگ</p>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li>• توسعه و نگهداری اتاق جنگ، دیتابیس زنده و رفع موانع فنی اتصال مشتریان.</li>
+            <li>• حضور فنی در جلسات حساس برای اثبات P99 زیر ۲ ثانیه و زیرساخت SMPP مستقیم.</li>
+          </ul>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-200">
+            «پایان قاشق‌به‌دهن: زیرساخت آماده است، اکنون توپ در زمین نتورکینگ و پیگیری تیم است.»
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Presentation Footer Info -->
+  <footer class="max-w-[1600px] mx-auto px-4 sm:px-6 mt-12 mb-6 text-center text-xs text-slate-500 font-mono">
+    <span>PERSIA FAVA GOSTARESH (PFG) &bull; B2B WAR ROOM &bull; STRATEGIC RETROSPECTIVE v2.0 &bull; LIVE ON STOCKHOLM VPS :8085</span>
+  </footer>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // State
+    let currentSlide = 1;
+    const totalSlides = 7;
+    let isDeckMode = true;
+    let annotationsEnabled = true;
+
+    const slideTitles = [
+      "۱. کالبدشکافی بدون تعارف ۴ اقدام گذشته",
+      "۲. تماس سرد تبلیغاتی در برابر سیستم‌های شبکه‌ای",
+      "۳. چرا ۵ قانون طلایی فیلترینگ را تدوین کردیم؟",
+      "۴. پلی‌بوک اسب تروجان: نفوذ از لایه دوم",
+      "۵. بررسی موردی ۳ حساب شاخص (طلاین، ترابرنت، اکوگلد)",
+      "۶. شبیه‌ساز تعاملی سناریوهای اقدام تیم",
+      "۷. پایان انفعال و قرارداد مسئولیت تیم"
+    ];
+
+    function init() {
+      renderDots();
+      updateSlideView();
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!isDeckMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+          prevSlide();
+        }
+      });
+    }
+
+    function renderDots() {
+      const container = document.getElementById('slide-dots-container');
+      container.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-[#527C78] w-6' : 'bg-slate-600 hover:bg-slate-400'}`;
+        dot.onclick = () => goToSlide(i);
+        container.appendChild(dot);
+      }
+    }
+
+    function updateSlideView() {
+      if (isDeckMode) {
+        for (let i = 1; i <= totalSlides; i++) {
+          const el = document.getElementById(`slide-${i}`);
+          if (el) {
+            el.style.display = (i === currentSlide) ? 'block' : 'none';
+          }
+        }
+        document.getElementById('current-slide-title').innerText = slideTitles[currentSlide - 1];
+        document.getElementById('slide-number-indicator').innerText = `${currentSlide} / ${totalSlides}`;
+        document.getElementById('btn-prev-slide').disabled = (currentSlide === 1);
+        document.getElementById('btn-next-slide').disabled = (currentSlide === totalSlides);
+        renderDots();
+      } else {
+        // Dashboard mode: show all
+        for (let i = 1; i <= totalSlides; i++) {
+          const el = document.getElementById(`slide-${i}`);
+          if (el) el.style.display = 'block';
+        }
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlideView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlideView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function goToSlide(num) {
+      currentSlide = num;
+      updateSlideView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchViewMode(mode) {
+      const btnDeck = document.getElementById('btn-mode-deck');
+      const btnDash = document.getElementById('btn-mode-dashboard');
+      const controller = document.getElementById('deck-controller');
+
+      if (mode === 'deck') {
+        isDeckMode = true;
+        btnDeck.className = "px-3 py-1.5 rounded-lg bg-[#527C78] text-white font-bold transition flex items-center gap-1.5 shadow-sm";
+        btnDash.className = "px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-300 font-medium transition flex items-center gap-1.5";
+        controller.style.display = 'flex';
+      } else {
+        isDeckMode = false;
+        btnDash.className = "px-3 py-1.5 rounded-lg bg-[#527C78] text-white font-bold transition flex items-center gap-1.5 shadow-sm";
+        btnDeck.className = "px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-300 font-medium transition flex items-center gap-1.5";
+        controller.style.display = 'none';
+      }
+      updateSlideView();
+    }
+
+    function toggleAnnotations() {
+      annotationsEnabled = !annotationsEnabled;
+      const btnText = document.getElementById('annotation-btn-text');
+      if (annotationsEnabled) {
+        document.body.classList.remove('hide-annotations');
+        btnText.innerText = "یادداشت‌های خودمانی مارکر: فعال";
+      } else {
+        document.body.classList.add('hide-annotations');
+        btnText.innerText = "یادداشت‌های خودمانی مارکر: خاموش";
+      }
+    }
+
+    function switchCaseTab(tabKey) {
+      document.querySelectorAll('.case-tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`case-tab-${tabKey}`).classList.remove('hidden');
+
+      ['taline', 'tarabar', 'ecogold'].forEach(k => {
+        const btn = document.getElementById(`tab-btn-${k}`);
+        if (k === tabKey) {
+          btn.className = "px-4 py-2 rounded-xl bg-[#527C78] text-white font-bold text-xs transition";
+        } else {
+          btn.className = "px-4 py-2 rounded-xl bg-[#2A3631] text-slate-300 font-semibold text-xs hover:bg-[#34433D] transition";
+        }
+      });
+    }
+
+    function handleSimChoice(choice) {
+      const box = document.getElementById('sim-feedback-box');
+      box.classList.remove('hidden');
+
+      if (choice === 'A') {
+        box.className = "p-5 rounded-xl border border-rose-500/50 bg-rose-950/20 text-rose-200 text-xs space-y-2";
+        box.innerHTML = `
+          <div class="font-bold text-sm text-rose-300 flex items-center gap-2">
+            <span>❌ نتیجه انتخاب الف: بن‌بست کامل در دبیرخانه!</span>
+          </div>
+          <p class="leading-relaxed">منشی دفتر مرکزی اکوگلد آموزش دیده که تمام تماس‌های بازاریابی پیامک، بیمه و سررسید را پشت خط مسدود کند. او به شما می‌گوید: «ممنون، نیازی نداریم، کاتالوگ را به info ایمیل کنید» و پرونده شما همان لحظه بسته می‌شود.</p>
+          <div class="annotation-layer marker-note-pink p-2.5 text-[11px] text-rose-100 mt-2">
+            🖍️ نکته مارکر: تماس کور با شماره عمومی دفتر، کم‌ارزش‌ترین نوع اقدام است و فقط انرژی شما را تلف می‌کند!
+          </div>
+        `;
+      } else if (choice === 'B') {
+        box.className = "p-5 rounded-xl border border-orange-500/50 bg-orange-950/20 text-orange-200 text-xs space-y-2";
+        box.innerHTML = `
+          <div class="font-bold text-sm text-orange-300 flex items-center gap-2">
+            <span>⚠️ نتیجه انتخاب ب: دیده شدن بدون پاسخ (Seen بدون جواب)!</span>
+          </div>
+          <p class="leading-relaxed">مدیر مارکتینگ ده‌ها پیام شبیه به این در طول هفته دریافت می‌کند. او مسئول فنی نیست و نمی‌تواند روت پیامک را تغییر دهد. او پیام را می‌بیند اما جوابی نمی‌دهد چون نفعی در تغییر وضعیت موجود ندارد.</p>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-100 mt-2">
+            🖍️ نکته مارکر: ارسال جدول تعرفه برای مارکتینگ نشان می‌دهد ما درک نکرده‌ایم پیامک OTP چطور در سازمان کار می‌کند!
+          </div>
+        `;
+      } else if (choice === 'C') {
+        box.className = "p-5 rounded-xl border border-emerald-500/50 bg-emerald-950/20 text-emerald-200 text-xs space-y-2";
+        box.innerHTML = `
+          <div class="font-bold text-sm text-emerald-300 flex items-center gap-2">
+            <span>🎉 نتیجه انتخاب ج: نفوذ طلایی و ایجاد قهرمان داخلی!</span>
+          </div>
+          <p class="leading-relaxed">سینا صفایی به عنوان مهندس زیرساخت، دغدغه قطع نشدن ترافیک در نوسان قیمت شمش را دارد. پیشنهاد شما هیچ ریسکی برای او ندارد؛ بدون نیاز به اجازه مالی مدیرعامل، کلید تست ۵۰k را در ۱۰ دقیقه روی سیستم تست ست می‌کند. سرعت زیر ۲ ثانیه را می‌بیند و شخصاً اکوگلد را به سمت قرارداد رسمی با پرشیا فاوا هدایت می‌کند.</p>
+          <div class="annotation-layer marker-note-orange p-2.5 text-[11px] text-orange-100 mt-2">
+            🖍️ نکته مارکر: احسنت! این یعنی توسعه کسب‌وکار و سیستم‌های شبکه‌ای. کمترین اصطکاک، بیشترین ارزش افزوده.
+          </div>
+        `;
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
